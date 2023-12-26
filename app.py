@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from data import get_data_from_postgres
 
 app = Flask(__name__)
+app.secret_key = 'ENS'
 
 data = {}
 
@@ -24,14 +25,15 @@ def get_wards(city, region):
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
-    data = request.json
-    print('Received data:', data)
-    # Add your logic to process the data here
-    # For demonstration purposes, let's return a simple response
+    location_data = request.json
+    session['location_data'] = location_data
+    print('Received data:', location_data)
     return redirect(url_for('user'))
 
 @app.route('/user')
 def user():
+    location_data = session.get('location_data', {})
+    print(location_data)
     return render_template('users.html')
 
 if __name__ == '__main__':

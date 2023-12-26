@@ -76,8 +76,8 @@
                         // Populate ward dropdown
                         data.forEach(function(ward) {
                             var optionElement = document.createElement('option');
-                            optionElement.value = ward;
-                            optionElement.text = ward;
+                            optionElement.value = ward.id + ' - ' + ward.name;
+                            optionElement.text = ward.id + ' - ' + ward.name;
                             wardDropdown.add(optionElement);
                         });
 
