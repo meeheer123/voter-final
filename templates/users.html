@@ -3,9 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Page</title>
+    <title>Voting Path</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='users.css') }}">
+    <!-- <img src="{{ url_for('static', filename='image/election-logo.png') }}" /> -->
 </head>
 <body>
-    <h1>Welcome to the User Page!</h1>
+    <div class="head-container">
+        <header>
+            <div class="logo1">
+                <!-- <img src="{{ url_for('static', filename='image/election-logo.png') }}" /> -->
+            </div>
+            <div class="heading"><h1>Election Navigation System</h1></div>
+            <div class="logo2">
+                <!-- <img src="{{ url_for('static', filename='image/gov-logo.png') }}" /> -->
+            </div>
+        </header><br>
+        <marquee>The Upcoming election is at 2024</marquee>
+    </div>
+
+    <div class="form-container">
+        <form method="post" autocomplete="off">
+            <label for="voter-id">Enter Voter ID       :    </label>
+            <input type="search" name="voting-id" id="voting-id" placeholder="Enter Voting ID"><br>
+            <label for="voter-name">Enter your name:</label>
+            <input type="search" name="name" id="voting-name" placeholder="Enter Name"><br>
+            <input type="submit" value="Search" ><br>
+        </form>
+    </div>
+
+    <div class="table-container">
+        {% if show_table %}
+							<div class="container-table">
+								<table class="table1">
+									<thead>
+										<tr>
+											<th scope="col">ID</th>
+											<th scope="col">First Name</th>
+											<th scope="col">Middle Name</th>
+											<th scope="col">Last Name</th>
+											<th scope="col">Age</th>
+											<th scope="col">Gender</th>
+											<th scope="col">Direction</th>
+										</tr>
+									</thead>
+									<!-- this is a for jinja for loop used to display all the data variables -->
+									<tbody>
+										{% for person in result %}
+										<tr>
+											<td scope="row">{{person[6]}}</th>
+											<!--the loop index is used to maintain the integers getting unordered after deleting anything-->
+											<td>{{person[0]}}</td>
+											<td>{{person[1]}}</td>
+											<td>{{person[2]}}</td>
+											<td>{{person[3]}}</td>
+											<td>{{person[4]}}</td>
+											<!-- Modify the button to include a link to the "redirect" route with the address as a parameter -->
+											<td>
+												<a
+													href="{{ url_for('redirect', address=person[6]) }}"
+													class="btn btn-primary"
+													>Navigate</a
+												>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+							<!-- Navigation Here -->
+						{% endif %} 
+					{% if error_message %}
+						<script>
+							// Display an alert with the message from Python
+							alert("{{ error_message }}");
+						</script>
+					{% endif %}
+    </div>
+<div class="map-conatiner">
+</div>
 </body>
 </html>
