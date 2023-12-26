@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Your other HTML head elements go here -->
+</head>
+<body>
+    <!-- Your HTML body content goes here -->
+
+    <!-- Script to handle redirection to Google Maps -->
+    <script>
+    var x = "";
+    var lat = "";
+    var lon = "";
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                // Success function
+                showPosition, 
+                // Error function
+                null, 
+                // Options. See MDN for details.
+                {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                });
+        } else { 
+            x = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+
+        // Get the destination address from Jinja
+        var address = "{{ address }}";
+        
+        // Call redirectToGoogleMaps only after getting the location
+        redirectToGoogleMaps(lat, lon, address);
+    }
+    
+
+    function redirectToGoogleMaps(lat, lon, destinationCoords) {
+        const currentLocation = `${lat},${lon}`;
+        const destinationLocation = encodeURIComponent(destinationCoords);
+        
+        const googleMapsURL = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(currentLocation)}&destination=${destinationLocation}`;
+        
+        window.location.href = googleMapsURL;
+    }
+
+    // Call getLocation to start the geolocation process
+    getLocation();
+    </script>
+</body>
+</html>
