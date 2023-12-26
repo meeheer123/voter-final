@@ -189,7 +189,7 @@ def user():
 
                 if len(result) == 1:
                     session[name] = result
-                    return render_template('redirect.html', address=result[0][6])
+                    return render_template('redirect.html', address=result[0][5])
                 else:
                     return render_template("users.html", error_message="No Data Found")
 
