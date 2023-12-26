@@ -4,31 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting Path</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='users.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='users.css') }}">
+	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='eci.jpg') }}">
     <!-- <img src="{{ url_for('static', filename='image/election-logo.png') }}" /> -->
 </head>
 <body>
     <div class="head-container">
-        <header>
-            <div class="logo1">
-                <!-- <img src="{{ url_for('static', filename='image/election-logo.png') }}" /> -->
-            </div>
-            <div class="heading"><h1>Election Navigation System</h1></div>
-            <div class="logo2">
-                <!-- <img src="{{ url_for('static', filename='image/gov-logo.png') }}" /> -->
-            </div>
-        </header><br>
-        <marquee>The Upcoming election is at 2024</marquee>
+	</div>
+    <header class="header">
+        <hgroup>
+            <h1>Chief Electoral Officer, Maharashtra</h1>
+            <h2>Greater Participation for a Stronger Democracy</h2>
+        </hgroup>
+    	<nav>
+		    <ul>
+             <li><a style="float:left;margin-left:20px;" href="https://ceo.maharashtra.gov.in/">Voter Information</a></li>
+		    </ul>				
+		</nav>	
+        <a href="https://ceo.maharashtra.gov.in/" title="CEO Maharashtra Homepage"><img src="{{ url_for('static', filename='eci.jpg') }}" alt="CEO Maharashtra"></a>
+    </header>
+    <div><br>
+        <marquee style="color: #ff0000;font-weight:600;font-size: medium;background-color: #d6fa07;margin-bottom: 1%;border-radius: 1%;">The Upcoming election is at 2024</marquee>
     </div>
 
     <div class="form-container">
         <form method="post" autocomplete="off">
-            <label for="voter-id">Enter Voter ID       :    </label>
-            <input type="search" name="voting-id" id="voting-id" placeholder="Enter Voting ID"><br>
-            <label for="voter-name">Enter your name:</label>
-            <input type="search" name="name" id="voting-name" placeholder="Enter Name"><br>
-            <input type="submit" value="Search" ><br>
+            <!-- <br>
+            
+			 <br>
+           <br> -->
+		   <label for="voter-id">Enter Voter ID       :    </label>
+		   <input type="search" name="voting-id" id="voting-id" placeholder="Enter Voting ID" >
+	
+			<label for="voter-name">Enter your name:</label>
+			<input type="search" name="name" id="voting-name" placeholder="Enter Name">
+            <input type="submit" class="button" value="Search" >
         </form>
+		
     </div>
 
     <div class="table-container">
@@ -60,7 +72,7 @@
 											<!-- Modify the button to include a link to the "redirect" route with the address as a parameter -->
 											<td>
 												<a
-													href="{{ url_for('redirect', address=person[5]) }}"
+													href="{{ url_for('redirect', address=person[6]) }}"
 													class="btn btn-primary"
 													>Navigate</a
 												>
@@ -81,5 +93,9 @@
     </div>
 <div class="map-conatiner">
 </div>
+<footer>
+	<p>Copyright © 2013 Office of the Chief Electoral Officer, Maharashtra, All rights reserved.</p>
+				
+</footer>
 </body>
 </html>
