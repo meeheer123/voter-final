@@ -8,39 +8,48 @@
 <body>
     <h1>Dropdown Form</h1>
     <form id="myForm">
-        <label for="dropdown1">Dropdown 1:</label>
-        <select id="dropdown1" name="dropdown1" onchange="submitForm()">
-            <option value="">Select Region</option>
-            <option value="optionA">Option A</option>
-            <option value="optionB">Option B</option>
-            <option value="optionC">Option C</option>
+        <label for="city">Select City:</label>
+        <select id="city" name="city">
+            <option value="">Select City</option>
+            {% for city in cities %}
+                <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
         </select>
 
         <br>
 
-        <label for="dropdown2">Dropdown 2:</label>
-        <select id="dropdown2" name="dropdown2" disabled onchange="submitForm()">
+        <label for="region">Select Region:</label>
+        <select id="region" name="region" disabled>
             <option value="">Select Region</option>
-            <!-- Dropdown 2 options will be populated using JavaScript -->
+            <!-- Options will be populated using JavaScript -->
         </select>
 
         <br>
 
-        <label for="dropdown3">Dropdown 3:</label>
-        <select id="dropdown3" name="dropdown3" disabled onchange="submitForm()">
-            <option value="">Select Region</option>
-            <!-- Dropdown 3 options will be populated using JavaScript -->
+        <label for="ward">Select Ward:</label>
+        <select id="ward" name="ward" disabled>
+            <option value="">Select Ward</option>
+            <!-- Options will be populated using JavaScript -->
         </select>
+
+        <br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
     </form>
 
     <script>
         function submitForm() {
-            var dropdown1Value = document.getElementById('dropdown1').value;
+            var city = document.getElementById('city').value;
+            var region = document.getElementById('region').value;
+            var ward = document.getElementById('ward').value;
+
             var formData = {
-                dropdown1: dropdown1Value
+                city: city,
+                region: region,
+                ward: ward
             };
 
-            // Assuming you're using AJAX to send data to the Python backend
+            // Assuming you're using AJAX to send data to the Flask backend
             // You can use libraries like Axios or the native Fetch API
 
             // Example using Fetch API
@@ -55,18 +64,6 @@
             .then(data => {
                 console.log('Success:', data);
                 // Handle success as needed
-
-                // Once the first dropdown is submitted, enable and populate the second dropdown
-                var dropdown2Options = getDropdown2Options(dropdown1Value);
-                enableDropdown('dropdown2', dropdown2Options);
-
-                // Optionally, you can pre-select the first option in the second dropdown
-                document.getElementById('dropdown2').value = dropdown2Options[0];
-
-                // Now that the second dropdown is populated, you can also enable and populate the third dropdown
-                var dropdown2Value = document.getElementById('dropdown2').value;
-                var dropdown3Options = getDropdown3Options(dropdown1Value, dropdown2Value);
-                enableDropdown('dropdown3', dropdown3Options);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -74,57 +71,54 @@
             });
         }
 
-        function enableDropdown(dropdownId, options) {
-            var dropdown = document.getElementById(dropdownId);
-            dropdown.disabled = false;
+        document.addEventListener("DOMContentLoaded", function() {
+            var cityDropdown = document.getElementById('city');
+            var regionDropdown = document.getElementById('region');
+            var wardDropdown = document.getElementById('ward');
 
-            // Clear existing options
-            dropdown.innerHTML = "";
+            cityDropdown.addEventListener('change', function() {
+                // Reset region and ward dropdowns
+                regionDropdown.innerHTML = '<option value="">Select Region</option>';
+                wardDropdown.innerHTML = '<option value="">Select Ward</option>';
+                
+                // Fetch regions for the selected city
+                fetch('/get_regions/' + cityDropdown.value)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate region dropdown
+                        data.forEach(function(region) {
+                            var optionElement = document.createElement('option');
+                            optionElement.value = region;
+                            optionElement.text = region;
+                            regionDropdown.add(optionElement);
+                        });
 
-            // Populate the dropdown with options
-            options.forEach(function(option) {
-                var optionElement = document.createElement('option');
-                optionElement.value = option;
-                optionElement.text = option;
-                dropdown.add(optionElement);
+                        // Enable region dropdown
+                        regionDropdown.disabled = false;
+                    });
             });
-        }
 
-        function getDropdown2Options(dropdown1Value) {
-            // Define mapping for options in dropdown2 based on dropdown1Value
-            var optionsMap = {
-                'optionA': ['Option B', 'Option C', 'Option D'],
-                'optionB': ['Option E', 'Option F', 'Option G'],
-                'optionC': ['Option X', 'Option Y', 'Option Z']
-                // Add more mappings as needed
-            };
+            regionDropdown.addEventListener('change', function() {
+                // Reset ward dropdown
+                wardDropdown.innerHTML = '<option value="">Select Ward</option>';
 
-            return optionsMap[dropdown1Value] || [];
-        }
+                // Fetch wards for the selected region
+                fetch('/get_wards/' + regionDropdown.value)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate ward dropdown
+                        data.forEach(function(ward) {
+                            var optionElement = document.createElement('option');
+                            optionElement.value = ward;
+                            optionElement.text = ward;
+                            wardDropdown.add(optionElement);
+                        });
 
-        function getDropdown3Options(dropdown1Value, dropdown2Value) {
-            // Define mapping for options in dropdown3 based on dropdown1Value and dropdown2Value
-            var optionsMap = {
-                'optionA': {
-                    'Option B': ['Option P', 'Option Q', 'Option R'],
-                    'Option C': ['Option S', 'Option T', 'Option U'],
-                    'Option D': ['Option V', 'Option W', 'Option X']
-                },
-                'optionB': {
-                    'Option E': ['Option Y', 'Option Z', 'Option AA'],
-                    'Option F': ['Option BB', 'Option CC', 'Option DD'],
-                    'Option G': ['Option EE', 'Option FF', 'Option GG']
-                },
-                'optionC': {
-                    'Option X': ['Option HH', 'Option II', 'Option JJ'],
-                    'Option Y': ['Option KK', 'Option LL', 'Option MM'],
-                    'Option Z': ['Option NN', 'Option OO', 'Option PP']
-                }
-                // Add more mappings as needed
-            };
-
-            return optionsMap[dropdown1Value] && optionsMap[dropdown1Value][dropdown2Value] || [];
-        }
+                        // Enable ward dropdown
+                        wardDropdown.disabled = false;
+                    });
+            });
+        });
     </script>
 </body>
 </html>
