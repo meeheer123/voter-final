@@ -11,7 +11,7 @@ def index():
     # global data  # Use the global variable
     # data = get_data_from_postgres()
    
-    return render_template('index.html', cities=list(data.keys()))
+    return render_template('final.html', cities=list(data.keys()))
 
 @app.route('/get_regions/<district>', methods=['GET'])
 def get_regions(district):

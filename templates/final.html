@@ -4,8 +4,8 @@
     <title>
         Voter Locator
 </title>
-<link href="style.css" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="eci.jpg">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='eci.jpg') }}">
 </head>
 
 <body>
@@ -16,23 +16,6 @@
 <input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="">
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="aroVtwTMWw2XXq+vS/wYVTiKATtdOW09FtIFc/tsJaFt3D4oYoRqS/vpZALNwGDDQ6yNnqzwx/JA2wTZpt1FvDIMNSd3VO9UPL1O4quPcbfwMf5K1OTKE12QY2HeP5s8QzBQWwWksCt5ZXxqsPf9VacOkZQwr7XYDbIVWQXudz2nJ6K9OAkhNFQm+0BlvLv6nlHhIMP811ittv6wlKHn2m9GgPcS4tpEXHrgjEGKiqJn1jZ01zAjD5ZJfTxFyHi8n3ToutKABoNZSA2FEIIDj0hOXzC39r3WgyG9jq7PGukrJjK+O0E9Gkljib4V8i5twcQp6FLXm/dcPMCalJ3sivVMObhPmu81vrKyXkAk3yrmJGR44fK1lF9qrQhmp+12hah/R/wEtGYRQder7eceYAdPlJj//WHjwe5H/HUM0BlQLLKIK19GGE8eXMc3Ju7L8KV7IrD5L5/iiqumhz1C0Xea+mvCxKugOXNAwVa5RvwJTJDgvIpgkqFEnxEX+LNvipqJzH3ZmiuKoy3/Y2eiaoXQcKqH1VNpEG053L5j6Di1BvoKSi+5H6RPdjL9l92QJva6BUZanYLbz3ClChE5PLMe8rMICdrjQYiWAsvzmQitnFjvjNKoc7YtxkocFUnuJnHCcS/9Cai9vwrDsUiGDXcXdZXGD8SFJCT+oEKaL89xq0Zwji+0me9Hjt+6pSnyC2fHZmOM0dFFb66JKN7kWJAmCeR8tSDJEJVaPT3TsuwxcDPahyyl3rnfSN0G0InCYItDWGQebwQqog5p51h7YvxM9vkSpLR7raqRT61gU2Ou9ghPl3Lm7HiGIlR7045wGX8xoXMDhaXomBFAhPTAaGSv+2a+RiAB2igreM4+Cr8BJOc0m1Atb3xEgsa7Xy73qUVN3uN7JKhcGH3eYXvWIgDhSygEfMf44h3FtfOuB5MpzQSbzJVERoFEk9YA9JRb9PjvVaCAq6c9kVKfBzeCEZvsAnhTEoaTxp9Sk2xVUJJEup5uBtgqNa/5y80v6lmFdRdtQN2JdD5gLXMaNHfJfOCzogmzWgkR0n+5KlSvNFVMtK5KrulAoIMzcKVrdvWt">
 </div>
-
-<script type="text/javascript">
-//<![CDATA[
-var theForm = document.forms['aspnetForm'];
-if (!theForm) {
-    theForm = document.aspnetForm;
-}
-function __doPostBack(eventTarget, eventArgument) {
-    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
-        theForm.__EVENTTARGET.value = eventTarget;
-        theForm.__EVENTARGUMENT.value = eventArgument;
-        theForm.submit();
-    }
-}
-//]]>
-</script>
-
 
 <div>
 
@@ -50,22 +33,15 @@ function __doPostBack(eventTarget, eventArgument) {
              <li><a style="float:left;margin-left:20px;" href="https://ceo.maharashtra.gov.in/">Home</a></li>
 		    </ul>				
 		</nav>	
-        <a href="https://ceo.maharashtra.gov.in/" title="CEO Maharashtra Homepage"><img src="eci.jpg" alt="CEO Maharashtra"></a>
+        <a href="https://ceo.maharashtra.gov.in/" title="CEO Maharashtra Homepage"><img src="{{ url_for('static', filename='eci.jpg') }}" alt="CEO Maharashtra"></a>
     </header>
     <div>
         <article>
-        
-    
-    <script type="text/javascript">
-        function openInNewTab() {
-            window.document.forms[0].target = '_blank';
-            setTimeout(function () { window.document.forms[0].target = ''; }, 0);
-        }
-</script>
     <h2>Search <span style="color:blue">Election Location Locator</span> 2024</h2>
     <table class="bordered">
-        <tbody><tr>
-            <th style="width:45%">Select District</th>
+        <tbody>
+            <!-- <tr> -->
+            <!-- <th style="width:45%">Select District</th>
             <td>
                 <select name="ctl00$Content$DistrictList" onchange="javascript:setTimeout('__doPostBack(\'ctl00$Content$DistrictList\',\'\')', 0)" id="ctl00_Content_DistrictList" style="width:40%;" fdprocessedid="slh18j">
 	<option selected="selected" value="0">-- Select District --</option>
@@ -109,14 +85,14 @@ function __doPostBack(eventTarget, eventArgument) {
 </select>
 </td>
 </tr>
-<tr>
-    <th><label for="city">Select City:</label></th>
+<tr> -->
+    <th><label for="city">Select District:</label></th>
     <td>
-        <select name="city" id="city" onchange="javascript:setTimeout('__doPostBack(\'ctl00$Content$AssemblyList\',\'\')', 0)" fdprocessedid="hvh79">
+        <select id="city" name="city">
+            <option value="">Select District</option>
             {% for city in cities %}
                 <option value="{{ city }}">{{ city }}</option>
             {% endfor %}
-            
         </select>
                 
     </td>
@@ -124,42 +100,35 @@ function __doPostBack(eventTarget, eventArgument) {
 <tr>
     <th><label for="region">Select Region:</label></th>
     <td>
-        <select name="region" id="region" onchange="javascript:setTimeout('__doPostBack(\'ctl00$Content$AssemblyList\',\'\')', 0)" fdprocessedid="hvh79">
-            {% for region in regions[selected_city] %}
-                <option value="{{ region }}">{{ region }}</option>
-            {% endfor %}
-        
-    </select>
+        <select id="region" name="region" disabled>
+            <option value="">Select Region</option>
+            <!-- Options will be populated using JavaScript -->
+        </select>
 </td>
 </tr>
 <tr>
     <th><label for="ward">Select Ward:</label></th>
     <td>
-        <select name="ward" id="ward" onchange="javascript:setTimeout('__doPostBack(\'ctl00$Content$AssemblyList\',\'\')', 0)" fdprocessedid="hvh79">
-            {% for ward in wards[selected_region] %}
-                <option value="{{ ward }}">{{ ward }}</option>
-            {% endfor %}
-
-</select>
+        <select id="ward" name="ward" disabled>
+            <option value="">Select Ward</option>
+            <!-- Options will be populated using JavaScript -->
+        </select>
                 
-            </td>
-        </tr>
-         <tr>
-           <th style="width:45%">Type of Revision</th>
-            <td>
-                 <span id="ctl00_Content_listrollrevision" style="color:#336699;"><input id="ctl00_Content_listrollrevision_0" type="radio" name="ctl00$Content$listrollrevision" value="1" checked="checked"><label for="ctl00_Content_listrollrevision_0">SSR 2023&nbsp;&nbsp;</label><input id="ctl00_Content_listrollrevision_1" type="radio" name="ctl00$Content$listrollrevision" value="2" onclick="javascript:setTimeout('__doPostBack(\'ctl00$Content$listrollrevision$1\',\'\')', 0)"><label for="ctl00_Content_listrollrevision_1">Revision 2</label><input id="ctl00_Content_listrollrevision_2" type="radio" name="ctl00$Content$listrollrevision" value="3" onclick="javascript:setTimeout('__doPostBack(\'ctl00$Content$listrollrevision$2\',\'\')', 0)"><label for="ctl00_Content_listrollrevision_2">Revision 3</label></span>
             </td>
         </tr>
          <tr>
            <th style="width:45%">Language of E-Rolls</th>
             <td>
-                 <span id="ctl00_Content_LangTypepdf" style="color:#336699;"><input id="ctl00_Content_LangTypepdf_0" type="radio" name="ctl00$Content$LangTypepdf" value="1" checked="checked"><label for="ctl00_Content_LangTypepdf_0">Marathi</label><input id="ctl00_Content_LangTypepdf_1" type="radio" name="ctl00$Content$LangTypepdf" value="2" onclick="javascript:setTimeout('__doPostBack(\'ctl00$Content$LangTypepdf$1\',\'\')', 0)"><label for="ctl00_Content_LangTypepdf_1">English </label><input id="ctl00_Content_LangTypepdf_2" type="radio" name="ctl00$Content$LangTypepdf" value="3" onclick="javascript:setTimeout('__doPostBack(\'ctl00$Content$LangTypepdf$2\',\'\')', 0)"><label for="ctl00_Content_LangTypepdf_2">Urdu</label><input id="ctl00_Content_LangTypepdf_3" type="radio" name="ctl00$Content$LangTypepdf" value="4" onclick="javascript:setTimeout('__doPostBack(\'ctl00$Content$LangTypepdf$3\',\'\')', 0)"><label for="ctl00_Content_LangTypepdf_3">Kannada</label></span>
+                 <span id="ctl00_Content_LangTypepdf" style="color:#336699;"><input type="radio" name="ctl00$Content$LangTypepdf" value="1" checked="checked"><label for="ctl00_Content_LangTypepdf_0">Marathi</label>
+                    <input id="ctl00_Content_LangTypepdf_1" type="radio" name="ctl00$Content$LangTypepdf" value="2" ><label for="ctl00_Content_LangTypepdf_1">English </label>
+                    <input id="ctl00_Content_LangTypepdf_2" type="radio" name="ctl00$Content$LangTypepdf" value="3" ><label for="ctl00_Content_LangTypepdf_2">Urdu</label>
+                    <input id="ctl00_Content_LangTypepdf_3" type="radio" name="ctl00$Content$LangTypepdf" value="4" ><label for="ctl00_Content_LangTypepdf_3">Kannada</label></span>
             </td>
         </tr>
         <tr>
             <td style="text-align: right"><input name="ctl00$Content$txtcaptcha" type="text" id="ctl00_Content_txtcaptcha" style="width:200px;" fdprocessedid="h6t3b"></td>
             <td>
-               <img style="WIDTH: 200px; HEIGHT: 34px" alt="" src="Captcha.aspx">&nbsp;<a href="SearchPDF.aspx" id="uu">Refresh</a>
+               <img style="WIDTH: 200px; HEIGHT: 34px" alt="" src="{{ url_for('static', filename='Captcha.aspx') }}">&nbsp;<a href="SearchPDF.aspx" id="uu">Refresh</a>
             </td>
         </tr>
         <tr>
@@ -167,7 +136,7 @@ function __doPostBack(eventTarget, eventArgument) {
                </td> 
             <td>
                 
-                <button type="submit" class="button">Submit</button>
+                <button type="button" onclick="submitForm()" class="button">Submit</button>
             </td>
         </tr>
     </tbody></table>
@@ -180,7 +149,106 @@ function __doPostBack(eventTarget, eventArgument) {
 	    <p>Copyright © 2013 Office of the Chief Electoral Officer, Maharashtra, All rights reserved.</p>
                     
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var cityDropdown = document.getElementById('city');
+            var regionDropdown = document.getElementById('region');
+            var wardDropdown = document.getElementById('ward');
 
+            cityDropdown.addEventListener('change', function() {
+                // Reset region and ward dropdowns
+                regionDropdown.innerHTML = '<option value="">Select Region</option>';
+                wardDropdown.innerHTML = '<option value="">Select Ward</option>';
+
+                // Fetch regions for the selected city
+                fetch('/get_regions/' + cityDropdown.value)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate region dropdown
+                        data.forEach(function(region) {
+                            var optionElement = document.createElement('option');
+                            optionElement.value = region;
+                            optionElement.text = region;
+                            regionDropdown.add(optionElement);
+                        });
+
+                        // Enable region dropdown
+                        regionDropdown.disabled = false;
+                    });
+            });
+
+            regionDropdown.addEventListener('change', function() {
+                // Reset ward dropdown
+                wardDropdown.innerHTML = '<option value="">Select Ward</option>';
+
+                // Fetch wards for the selected city and region
+                fetch('/get_wards/' + cityDropdown.value + '/' + regionDropdown.value)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate ward dropdown
+                        data.forEach(function(ward) {
+                            var optionElement = document.createElement('option');
+                            optionElement.value = ward.id + ' - ' + ward.name;
+                            optionElement.text = ward.id + ' - ' + ward.name;
+                            wardDropdown.add(optionElement);
+                        });
+
+                        // Enable ward dropdown
+                        wardDropdown.disabled = false;
+                    });
+            });
+        });
+
+        function submitForm() {
+            var city = document.getElementById('city').value;
+            var region = document.getElementById('region').value;
+            var ward = document.getElementById('ward').value;
+
+            var formData = {
+                city: city,
+                region: region,
+                ward: ward
+            };
+
+            // Assuming you're using AJAX to send data to the Flask backend
+            // You can use libraries like Axios or the native Fetch API
+
+            // Example using Fetch API
+            fetch('/submit_form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // console.log('Success:', data);
+                // Handle success as needed
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle errors as needed
+            });
+            window.location.href = '/user';
+        }
+
+        var theForm = document.forms['aspnetForm'];
+        if (!theForm) {
+            theForm = document.aspnetForm;
+        }
+        function __doPostBack(eventTarget, eventArgument) {
+            if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                theForm.__EVENTTARGET.value = eventTarget;
+                theForm.__EVENTARGUMENT.value = eventArgument;
+                theForm.submit();
+            }
+        }
+        function openInNewTab() {
+                    window.document.forms[0].target = '_blank';
+                    setTimeout(function () { window.document.forms[0].target = ''; }, 0);
+                }
+    </script>
 
 </body>
 </html>
