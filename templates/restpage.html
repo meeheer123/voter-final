@@ -2,10 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Intermediate Page</title>
 </head>
 <body>
-    <h1>Hello </h1>
+    <h1>Hello, <span id="userName"></span></h1>
+    <p>Your voting center is located at:</p>
+    <p id="votingCenterAddress"></p>
+    <div id="map"></div>
+    <button onclick="navigate()">Navigate</button>
+    <button onclick="copyLink()">Copy Link</button>
+    <button onclick="shareOnWhatsApp()">Share on WhatsApp</button>
+
+    <script>
+        // Set user details and voting center address
+        document.getElementById('userName').innerText = 'NAME'; // Replace with actual user name
+        document.getElementById('votingCenterAddress').innerText = 'ADDRESS'; // Replace with actual address
+
+        // Initialize Leaflet map
+        const map = L.map('map').setView([latitude, longitude], 15); // Replace with actual coordinates
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Function to navigate
+        function navigate() {
+            // Implement navigation logic
+        }
+
+        // Function to copy link
+        function copyLink() {
+            // Implement link copy logic
+        }
+
+        // Function to share on WhatsApp
+        function shareOnWhatsApp() {
+            // Implement WhatsApp sharing logic
+        }
+    </script>
 </body>
 </html>
