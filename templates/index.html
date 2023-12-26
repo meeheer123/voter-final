@@ -38,6 +38,55 @@
     </form>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var cityDropdown = document.getElementById('city');
+            var regionDropdown = document.getElementById('region');
+            var wardDropdown = document.getElementById('ward');
+
+            cityDropdown.addEventListener('change', function() {
+                // Reset region and ward dropdowns
+                regionDropdown.innerHTML = '<option value="">Select Region</option>';
+                wardDropdown.innerHTML = '<option value="">Select Ward</option>';
+
+                // Fetch regions for the selected city
+                fetch('/get_regions/' + cityDropdown.value)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate region dropdown
+                        data.forEach(function(region) {
+                            var optionElement = document.createElement('option');
+                            optionElement.value = region;
+                            optionElement.text = region;
+                            regionDropdown.add(optionElement);
+                        });
+
+                        // Enable region dropdown
+                        regionDropdown.disabled = false;
+                    });
+            });
+
+            regionDropdown.addEventListener('change', function() {
+                // Reset ward dropdown
+                wardDropdown.innerHTML = '<option value="">Select Ward</option>';
+
+                // Fetch wards for the selected city and region
+                fetch('/get_wards/' + cityDropdown.value + '/' + regionDropdown.value)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate ward dropdown
+                        data.forEach(function(ward) {
+                            var optionElement = document.createElement('option');
+                            optionElement.value = ward;
+                            optionElement.text = ward;
+                            wardDropdown.add(optionElement);
+                        });
+
+                        // Enable ward dropdown
+                        wardDropdown.disabled = false;
+                    });
+            });
+        });
+
         function submitForm() {
             var city = document.getElementById('city').value;
             var region = document.getElementById('region').value;
@@ -71,55 +120,6 @@
             });
             window.location.href = '/user';
         }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            var cityDropdown = document.getElementById('city');
-            var regionDropdown = document.getElementById('region');
-            var wardDropdown = document.getElementById('ward');
-
-            cityDropdown.addEventListener('change', function() {
-                // Reset region and ward dropdowns
-                regionDropdown.innerHTML = '<option value="">Select Region</option>';
-                wardDropdown.innerHTML = '<option value="">Select Ward</option>';
-                
-                // Fetch regions for the selected city
-                fetch('/get_regions/' + cityDropdown.value)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Populate region dropdown
-                        data.forEach(function(region) {
-                            var optionElement = document.createElement('option');
-                            optionElement.value = region;
-                            optionElement.text = region;
-                            regionDropdown.add(optionElement);
-                        });
-
-                        // Enable region dropdown
-                        regionDropdown.disabled = false;
-                    });
-            });
-
-            regionDropdown.addEventListener('change', function() {
-                // Reset ward dropdown
-                wardDropdown.innerHTML = '<option value="">Select Ward</option>';
-
-                // Fetch wards for the selected region
-                fetch('/get_wards/' + regionDropdown.value)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Populate ward dropdown
-                        data.forEach(function(ward) {
-                            var optionElement = document.createElement('option');
-                            optionElement.value = ward;
-                            optionElement.text = ward;
-                            wardDropdown.add(optionElement);
-                        });
-
-                        // Enable ward dropdown
-                        wardDropdown.disabled = false;
-                    });
-            });
-        });
     </script>
 </body>
 </html>
