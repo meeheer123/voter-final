@@ -36,8 +36,16 @@
 		   <label for="voter-id">Enter Voter ID       :    </label>
 		   <input type="search" name="voting-id" id="voting-id" placeholder="Enter Voting ID" >
 	
-			<label for="voter-name">Enter your name:</label>
-			<input type="search" name="name" id="voting-name" placeholder="Enter Name">
+		   <label for="voter-name">Enter your name:</label>
+		   <!-- Use the "datalist" attribute to associate the input with the datalist element -->
+		   <input type="search" name="name" id="voting-name" placeholder="Enter Name" list="candidates">
+		   <!-- Define the datalist with the ID "candidates" -->
+		   <datalist id="candidates">
+			   <!-- Use a Jinja for loop to iterate over the candidates and display them as options -->
+			   {% for candidate in candidates %}
+				   <option value="{{ candidate[0] }}">
+			   {% endfor %}
+		   </datalist>
             <input type="submit" class="button" value="Search" >
         </form>
 		

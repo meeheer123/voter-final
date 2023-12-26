@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
-from data import get_data_from_postgres
+from data import get_data_from_postgres, get_candidates_for_location
 import psycopg2
 
 app = Flask(__name__)
@@ -36,6 +36,9 @@ def get_wards(district, region):
 def submit_form():
     location_data = request.json
     session['location_data'] = location_data
+    candidates = get_candidates_for_location(location_data)
+    session['candidates'] = candidates
+
     return redirect(url_for('user'))
 
 # @app.route('/user')
@@ -91,9 +94,11 @@ def user():
         name = request.form.get("name").lower().title()
         voter_id = request.form.get("voting-id")
         location_data = session.get('location_data', {})
+        candidates = session.get('candidates', [])
         district_name = location_data.get('city', "").title()
         region_name = location_data.get('region', "").title()
         part_name = location_data.get('ward', "").title()
+
 
         # print(district_name, region_name, part_name)
 
@@ -174,9 +179,9 @@ def user():
             query = """
                 SELECT v.first_name, v.middle_name, v.last_name, v.gender, v.age, vb.coordinates
                 FROM voters v
-                JOIN voting_booths vb ON v.booth_number = vb.booth_number
+                JOIN booths vb ON v.booth_number = vb.booth_number
                 JOIN parts p ON vb.part_id = p.part_id
-                JOIN assembly_constituencies ac ON p.constituency_id = ac.constituency_id
+                JOIN assemblyconstituencies ac ON p.constituency_id = ac.constituency_id
                 JOIN districts d ON ac.district_id = d.district_id
                 WHERE v.first_name = %s
                 AND v.last_name = %s
@@ -196,12 +201,14 @@ def user():
             except Exception as e:
                 return render_template("users.html", error_message=str(e))
     else:
-        return render_template("users.html")
+        candidates = session.get('candidates', [])
+        print(candidates)
+        return render_template("users.html", candidates=candidates)
     
     
 @app.route("/redirect/<address>")
 def redirect(address):
-    print('address', address)
+    # print('address', address)
     return render_template("redirect.html", address=address)
 
 # Error handlers
