@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
@@ -24,12 +24,9 @@ def submit_form():
     data = request.json
     print('Received data:', data)
     # Add your logic to process the data here
-    # For demonstration purposes, let's return a simple response
-    return redirect(url_for('user'))
 
-@app.route('/user')
-def user():
-    return render_template('users.html')
+    # For demonstration purposes, let's return a simple response
+    return jsonify({'status': 'success'})
 
 if __name__ == '__main__':
     app.run(debug=True)
