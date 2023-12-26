@@ -3,25 +3,11 @@ from data import get_data_from_postgres
 
 app = Flask(__name__)
 
-data = {
-    'Nagpur': {
-        'Katol': [],
-        'Savner': [],
-        'Hingna': [],
-        'Umred (SC)': [],
-        'Nagpur South West': ['Ambazari', 'Ajni'],
-        'Nagpur South': [],
-        'Nagpur East': [],
-        'Nagpur Central': [],
-        'Nagpur West': [],
-        'Nagpur North (SC)': [],
-        'Kamthi': [],
-        'Ramtek': []
-    }
-}
+data = {}
 
 @app.route('/')
 def index():
+    global data  # Use the global variable
     data = get_data_from_postgres()
     return render_template('index.html', cities=list(data.keys()))
 
