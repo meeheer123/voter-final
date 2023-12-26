@@ -42,7 +42,7 @@ def get_candidates_for_location(location_data):
     try:
         # Example query: Fetch candidates based on location data
         query = """
-            SELECT CONCAT(v.voter_id, ' - ', v.full_name) as candidate_info
+            SELECT v.full_name as candidate_info
             FROM voters v
             JOIN booths vb ON v.booth_number = vb.booth_number
             JOIN parts p ON vb.part_id = p.part_id
