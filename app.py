@@ -34,11 +34,15 @@ def get_wards(district, region):
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
-    location_data = request.json
+    location_data = {
+        'district': request.form.get('city'),
+        'region': request.form.get('region'),
+        'ward': request.form.get('ward'),
+    }
+
     session['location_data'] = location_data
     candidates = get_candidates_for_location(location_data)
     session['candidates'] = candidates
-
     return redirect(url_for('user'))
 
 # @app.route('/user')
@@ -202,7 +206,7 @@ def user():
                 return render_template("users.html", error_message=str(e))
     else:
         candidates = session.get('candidates', [])
-        print(candidates)
+        print('candidates', candidates)
         return render_template("users.html", candidates=candidates)
     
     
