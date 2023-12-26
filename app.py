@@ -34,25 +34,12 @@ def get_wards(district, region):
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
-    location_data = {
-        'district': request.form.get('city'),
-        'region': request.form.get('region'),
-        'ward': request.form.get('ward'),
-    }
-
+    location_data = request.json
     session['location_data'] = location_data
     candidates = get_candidates_for_location(location_data)
     session['candidates'] = candidates
     return redirect(url_for('user'))
 
-# @app.route('/user')
-# def user():
-#     location_data = session.get('location_data', {})
-#     print(location_data)
-#     return render_template('users.html')
-
-
-# voter details here
 
 # Function to execute SQL queries
 def execute_query(query, parameters=None):
@@ -206,7 +193,7 @@ def user():
                 return render_template("users.html", error_message=str(e))
     else:
         candidates = session.get('candidates', [])
-        print('candidates', candidates)
+        print(candidates)
         return render_template("users.html", candidates=candidates)
     
     
