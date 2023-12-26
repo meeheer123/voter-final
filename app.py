@@ -1,17 +1,10 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
-<<<<<<< HEAD
-# from data import get_data_from_postgres
-=======
 from data import get_data_from_postgres
 import psycopg2
->>>>>>> 4664741a03e80b481fa30734063653e06c50b2b4
 
 app = Flask(__name__)
 app.secret_key = 'ENS'
 
-<<<<<<< HEAD
-data = {'Nagpur': {'Katol': [], 'Savner': [], 'Hingna': [], 'Umred (SC)': [], 'Nagpur South West': [{'id': 1, 'name': 'Ambazari'}, {'id': 154, 'name': 'Ajni'}], 'Nagpur South': [], 'Nagpur East': [], 'Nagpur Central': [], 'Nagpur West': [], 'Nagpur North (SC)': [], 'Kamthi': [], 'Ramtek': []}}
-=======
 db_params = {
     'dbname': 'election_database',
     'user': 'postgres',
@@ -21,14 +14,12 @@ db_params = {
 }
 
 data = {}
->>>>>>> 4664741a03e80b481fa30734063653e06c50b2b4
 
 @app.route('/')
 def index():
-    # global data  # Use the global variable
-    # data = get_data_from_postgres()
-   
-    return render_template('final.html', cities=list(data.keys()))
+    global data  # Use the global variable
+    data = get_data_from_postgres()
+    return render_template('index.html', cities=list(data.keys()))
 
 @app.route('/get_regions/<district>', methods=['GET'])
 def get_regions(district):
