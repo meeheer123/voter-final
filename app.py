@@ -12,22 +12,21 @@ def index():
     data = get_data_from_postgres()
     return render_template('index.html', cities=list(data.keys()))
 
-@app.route('/get_regions/<city>', methods=['GET'])
-def get_regions(city):
-    city_data = data.get(city, {})
-    regions = list(city_data.keys())
+@app.route('/get_regions/<district>', methods=['GET'])
+def get_regions(district):
+    district_data = data.get(district, {})
+    regions = list(district_data.keys())
     return jsonify(regions)
 
-@app.route('/get_wards/<city>/<region>', methods=['GET'])
-def get_wards(city, region):
-    region_data = data.get(city, {}).get(region, [])
+@app.route('/get_wards/<district>/<region>', methods=['GET'])
+def get_wards(district, region):
+    region_data = data.get(district, {}).get(region, [])
     return jsonify(region_data)
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     location_data = request.json
     session['location_data'] = location_data
-    print('Received data:', location_data)
     return redirect(url_for('user'))
 
 @app.route('/user')
