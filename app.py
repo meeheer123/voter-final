@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
-# from data import get_data_from_postgres, get_candidates_for_location
+from data import get_data_from_postgres, get_candidates_for_location
 import psycopg2
 
 app = Flask(__name__)
@@ -7,18 +7,18 @@ app.secret_key = 'ENS'
 
 db_params = {
     'dbname': 'election_database',
-    'user': 'postgres',
-    'password': '35789512357',
-    'host': 'localhost',
+    'user': 'mihir',
+    'password': '2f1dXRnCquM3IxCVmsEjZEir0HmKp2fA',
+    'host': 'dpg-cm5tuba1hbls73alqd4g-a.singapore-postgres.render.com',
     'port': 5432
 }
 
-data = {'Nagpur': {'Katol': [], 'Savner': [], 'Hingna': [], 'Umred (SC)': [], 'Nagpur South West': [{'id': 1, 'name': 'Ambazari'}, {'id': 154, 'name': 'Ajni'}], 'Nagpur South': [], 'Nagpur East': [], 'Nagpur Central': [], 'Nagpur West': [], 'Nagpur North (SC)': [], 'Kamthi': [], 'Ramtek': []}}
+data = {}
 
 @app.route('/')
 def index():
-    # global data  # Use the global variable
-    # data = get_data_from_postgres()
+    global data  # Use the global variable
+    data = get_data_from_postgres()
     return render_template('index.html', cities=list(data.keys()))
 
 @app.route('/get_regions/<district>', methods=['GET'])
@@ -91,7 +91,7 @@ def user():
         part_name = location_data.get('ward', "").title()
 
 
-        # print(district_name, region_name, part_name)
+        print(district_name, region_name, part_name)
 
         if not name and not voter_id:
             return render_template("restpage.html", error_message="Please Enter Name")
@@ -157,6 +157,7 @@ def user():
                     # add here a middle step
                     elif len(result) == 1:
                         session[name] = result
+                        print(result)
                         return render_template('redirect.html', address=result[0][5])
 
                     # If no results, show an error message
@@ -174,10 +175,7 @@ def user():
                 JOIN parts p ON vb.part_id = p.part_id
                 JOIN assemblyconstituencies ac ON p.constituency_id = ac.constituency_id
                 JOIN districts d ON ac.district_id = d.district_id
-                WHERE v.first_name = %s
-                AND v.last_name = %s
-                AND d.district_name = %s
-                AND ac.constituency_name = %s
+                WHERE v.voter_id = %s
             """
 
             try:
