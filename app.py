@@ -7,9 +7,9 @@ app.secret_key = 'ENS'
 
 db_params = {
     'dbname': 'election_database',
-    'user': 'postgres',
-    'password': '35789512357',
-    'host': 'localhost',
+    'user': 'mihir',
+    'password': '2f1dXRnCquM3IxCVmsEjZEir0HmKp2fA',
+    'host': 'dpg-cm5tuba1hbls73alqd4g-a.singapore-postgres.render.com',
     'port': 5432
 }
 
