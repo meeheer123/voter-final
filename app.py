@@ -91,7 +91,7 @@ def user():
         part_name = location_data.get('ward', "").title()
 
 
-        # print(district_name, region_name, part_name)
+        print(district_name, region_name, part_name)
 
         if not name and not voter_id:
             return render_template("users.html", error_message="Please Enter Name")
@@ -157,6 +157,7 @@ def user():
                     # add here a middle step
                     elif len(result) == 1:
                         session[name] = result
+                        print(result)
                         return render_template('redirect.html', address=result[0][5])
 
                     # If no results, show an error message
@@ -174,10 +175,7 @@ def user():
                 JOIN parts p ON vb.part_id = p.part_id
                 JOIN assemblyconstituencies ac ON p.constituency_id = ac.constituency_id
                 JOIN districts d ON ac.district_id = d.district_id
-                WHERE v.first_name = %s
-                AND v.last_name = %s
-                AND d.district_name = %s
-                AND ac.constituency_name = %s
+                WHERE v.voter_id = %s
             """
 
             try:
