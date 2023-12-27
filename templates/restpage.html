@@ -1,122 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='restpage.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='image/eci.jpg') }}">
-    <title>Intermediate Page</title>
-    <!-- Include Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <style>
-        /* Add any custom styles for the map container here */
-        #map {
-            height: 300px;
-        }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <hgroup>
-            <h1>Chief Electoral Officer, Maharashtra</h1>
-            <h2>Greater Participation for a Stronger Democracy</h2>
-        </hgroup>
-        <nav>
-            <ul>
-                <li><a style="float:left;margin-left:20px;" href="https://ceo.maharashtra.gov.in/">Hello Voter</a></li>
-            </ul>
-        </nav>
-        <a href="https://ceo.maharashtra.gov.in/" title="CEO Maharashtra Homepage"><img src="{{ url_for('static', filename='image/eci.jpg') }}" alt="CEO Maharashtra"></a>
-    </header>
-    <div class="form-container">
-        <h1>Hello, <span id="userName"></span></h1>
-        <p class="paragraph">Your voting center is located at:</p>
-        <p id="votingCenterAddress"></p>
-        <!-- Leaflet map container -->
-        <div id="map"></div>
-        <button onclick="navigate()" class="buttonnavigate">Navigate</button>
-        <button onclick="copyLink()" class="buttoncopy">Copy Link</button>
-        <button onclick="shareOnWhatsApp()" class="buttonwhat">Share on WhatsApp</button>
-    </div>
-    <footer>
-        <p>Copyright © 2013 Office of the Chief Electoral Officer, Maharashtra, All rights reserved.</p>
-                    
-    </footer>
-    <!-- Include Leaflet JS -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        // Function to simulate typing effect
-        function typeWriter(elementId, text, speed) {
-            const element = document.getElementById(elementId);
-            let i = 0;
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='restpage.css') }}"
+		/>
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href="{{ url_for('static', filename='image/eci.jpg') }}"
+		/>
+		<title>Intermediate Page</title>
+		<!-- Include Leaflet CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+		<style>
+			/* Add any custom styles for the map container here */
+			#map {
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header">
+			<hgroup>
+				<h1>Chief Electoral Officer, Maharashtra</h1>
+				<h2>Greater Participation for a Stronger Democracy</h2>
+			</hgroup>
+			<nav>
+				<ul>
+					<li>
+						<a
+							style="float: left; margin-left: 20px"
+							href="https://ceo.maharashtra.gov.in/"
+							>Hello {{ result[-1] }}</a
+						>
+					</li>
+				</ul>
+			</nav>
+			<a href="https://ceo.maharashtra.gov.in/" title="CEO Maharashtra Homepage"
+				><img
+					src="{{ url_for('static', filename='image/eci.jpg') }}"
+					alt="CEO Maharashtra"
+			/></a>
+		</header>
+		<div class="form-container">
+			<h1>Hello, <span id="userName"></span></h1>
+			<p class="paragraph">Your voting center is located at:</p>
+			<p id="votingCenterAddress"></p>
+			<!-- Leaflet map container -->
+			<div id="map"></div>
+			<button onclick="navigate()" class="buttonnavigate">Navigate</button>
+			<button onclick="copyLink()" class="buttoncopy">Copy Link</button>
+			<button onclick="shareOnWhatsApp()" class="buttonwhat">
+				Share on WhatsApp
+			</button>
+		</div>
+		<footer>
+			<p>
+				Copyright © 2013 Office of the Chief Electoral Officer, Maharashtra, All
+				rights reserved.
+			</p>
+		</footer>
+		<!-- Include Leaflet JS -->
+		<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+		<script>
+			// Function to simulate typing effect
+			function typeWriter(elementId, text, speed) {
+				const element = document.getElementById(elementId);
+				let i = 0;
 
-            function type() {
-                if (i < text.length) {
-                    element.innerText += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
+				function type() {
+					if (i < text.length) {
+						const currentChar = text.charAt(i);
 
-            type();
-        }
+						// Check if the current character is a space
+						if (currentChar === " ") {
+							// If it's a space, append it directly
+							element.innerHTML += currentChar;
+						} else {
+							// If it's not a space, append it with a space
+							element.innerHTML += currentChar;
+						}
 
-        // Set user details and initiate typing effect
-        const userName = '{NAME}'; // Replace with actual user name
-        document.getElementById('userName').innerText = '';
-        typeWriter('userName', userName, 100); // Adjust the speed as needed
+						i++;
+						setTimeout(type, speed);
+					}
+				}
 
-        // Initialize Leaflet map
-        const map = L.map('map').setView([0, 0], 15);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+				type();
+			}
 
-        // Function to update voting center address
-        function updateVotingCenterAddress(address) {
-            document.getElementById('votingCenterAddress').innerText = address;
-        }
+			// Set user details and initiate typing effect
+			const userName = " {{ result[-1] }} "; // Replace with actual user name
+			document.getElementById("userName").innerText = "";
+			typeWriter("userName", userName, 100); // Adjust the speed as needed
 
-        // Function to get live location and update address
-        function getLiveLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
+			// Initialize Leaflet map
+			const resultCoordinates = result[5].split(",");
 
-                    // Update the Leaflet map
-                    map.setView([latitude, longitude], 15);
+			// Parse latitude and longitude as numbers
+			const customLatitude = parseFloat(resultCoordinates[0]);
+			const customLongitude = parseFloat(resultCoordinates[1]);
 
-                    // Call the OpenCage Geocoding API to get the address
-                    fetch(`https://api.opencagedata.com/geocode/v1/json?key=YOUR_OPENCAGE_API_KEY&q=${latitude}+${longitude}&pretty=1`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const address = data.results[0].formatted;
-                            updateVotingCenterAddress(address);
-                        })
-                        .catch(error => console.error('Error:', error));
-                });
-            } else {
-                console.error('Geolocation is not supported by this browser.');
-            }
-        }
+			// Create Leaflet map
+			const map = L.map("map").setView([customLatitude, customLongitude], 15);
 
-        // Call getLiveLocation when the page loads
-        getLiveLocation();
+			// Add OpenStreetMap tile layer
+			L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+				attribution: "© OpenStreetMap contributors",
+			}).addTo(map);
 
-        // Rest of your functions
-        function navigate() {
-            // Implement navigation logic
-        }
+			// Create a custom marker and add it to the map
+			const customMarker = L.marker([customLatitude, customLongitude]).addTo(
+				map
+			);
 
-        function copyLink() {
-            // Implement link copy logic
-        }
+			// Rest of your functions
+			function navigate() {
+				// Implement navigation logic
+			}
 
-        function shareOnWhatsApp() {
-            // Implement WhatsApp sharing logic
-        }
-    </script>
-</body>
+			function copyLink() {
+				// Implement link copy logic
+			}
+
+			function shareOnWhatsApp() {
+				// Implement WhatsApp sharing logic
+			}
+		</script>
+	</body>
 </html>

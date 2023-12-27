@@ -117,7 +117,7 @@ def user():
             else:
                 # SQL query for cases with or without middle name
                 query = """
-                    SELECT v.first_name, v.middle_name, v.last_name, v.age, v.gender, vb.coordinates, v.voter_id, vb.polling_station_address
+                    SELECT v.first_name, v.middle_name, v.last_name, v.age, v.gender, vb.coordinates, v.voter_id, vb.polling_station_address, v.full_name
                     FROM voters v
                     JOIN booths vb ON v.booth_number = vb.booth_number
                     JOIN parts p ON vb.part_id = p.part_id
@@ -158,7 +158,7 @@ def user():
                     elif len(result) == 1:
                         session[name] = result
                         print(result)
-                        return render_template('redirect.html', address=result[0][5])
+                        return render_template('restpage.html', result=result[0])
 
                     # If no results, show an error message
                     return render_template("users.html", error_message="No Data Found")
@@ -169,7 +169,7 @@ def user():
         elif voter_id:
             # Search by voter ID
             query = """
-                SELECT v.first_name, v.middle_name, v.last_name, v.gender, v.age, vb.coordinates
+                SELECT v.first_name, v.middle_name, v.last_name, v.gender, v.age, vb.coordinates, v.full_name
                 FROM voters v
                 JOIN booths vb ON v.booth_number = vb.booth_number
                 JOIN parts p ON vb.part_id = p.part_id
@@ -183,7 +183,7 @@ def user():
 
                 if len(result) == 1:
                     session[name] = result
-                    return render_template('redirect.html', address=result[0][5])
+                    return render_template('restpage.html', result=result[0])
                 else:
                     return render_template("users.html", error_message="No Data Found")
 
@@ -195,10 +195,10 @@ def user():
         return render_template("users.html", candidates=candidates)
     
     
-@app.route("/redirect/<address>")
-def redirect(address):
+@app.route("/redirect/<result>")
+def redirect(result):
     # print('address', address)
-    return render_template("redirect.html", address=address)
+    return render_template("restpage.html", result=result)
 
 # Error handlers
 @app.errorhandler(404)
