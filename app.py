@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
-# from data import get_data_from_postgres, get_candidates_for_location
+from data import get_data_from_postgres, get_candidates_for_location
 import psycopg2
 
 app = Flask(__name__)
@@ -7,9 +7,9 @@ app.secret_key = 'ENS'
 
 db_params = {
     'dbname': 'election_database',
-    'user': 'mihir',
-    'password': '2f1dXRnCquM3IxCVmsEjZEir0HmKp2fA',
-    'host': 'dpg-cm5tuba1hbls73alqd4g-a.singapore-postgres.render.com',
+    'user': 'postgres',
+    'password': '35789512357',
+    'host': 'localhost',
     'port': 5432
 }
 
@@ -17,8 +17,8 @@ data = {}
 
 @app.route('/')
 def index():
-    # global data  # Use the global variable
-    # data = get_data_from_postgres()
+    global data  # Use the global variable
+    data = get_data_from_postgres()
     return render_template('index.html', cities=list(data.keys()))
 
 @app.route('/get_regions/<district>', methods=['GET'])
