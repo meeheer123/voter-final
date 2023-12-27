@@ -94,7 +94,7 @@ def user():
         # print(district_name, region_name, part_name)
 
         if not name and not voter_id:
-            return render_template("users.html", error_message="Please Enter Name")
+            return render_template("restpage.html", error_message="Please Enter Name")
         
         if name:
 
@@ -151,7 +151,7 @@ def user():
                         """
                         Here will be the logic for using pagination
                         """
-                        return render_template('users.html', result=result, show_table = True)
+                        return render_template('restpage.html', result=result, show_table = True)
                     
                     # if single data
                     # add here a middle step
@@ -160,10 +160,10 @@ def user():
                         return render_template('redirect.html', address=result[0][5])
 
                     # If no results, show an error message
-                    return render_template("users.html", error_message="No Data Found")
+                    return render_template("restpage.html", error_message="No Data Found")
 
                 except Exception as e:
-                    return render_template("users.html", error_message=str(e))
+                    return render_template("restpage.html", error_message=str(e))
                 
         elif voter_id:
             # Search by voter ID
@@ -187,14 +187,14 @@ def user():
                     session[name] = result
                     return render_template('redirect.html', address=result[0][5])
                 else:
-                    return render_template("users.html", error_message="No Data Found")
+                    return render_template("restpage.html", error_message="No Data Found")
 
             except Exception as e:
-                return render_template("users.html", error_message=str(e))
+                return render_template("restpage.html", error_message=str(e))
     else:
         candidates = session.get('candidates', [])
         print(candidates)
-        return render_template("users.html", candidates=candidates)
+        return render_template("restpage.html", candidates=candidates)
     
     
 @app.route("/redirect/<address>")
