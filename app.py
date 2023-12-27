@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
-from data import get_data_from_postgres, get_candidates_for_location
+# from data import get_data_from_postgres, get_candidates_for_location
 import psycopg2
 
 app = Flask(__name__)
@@ -13,12 +13,12 @@ db_params = {
     'port': 5432
 }
 
-data = {}
+data = {'Nagpur': {'Katol': [], 'Savner': [], 'Hingna': [], 'Umred (SC)': [], 'Nagpur South West': [{'id': 1, 'name': 'Ambazari'}, {'id': 154, 'name': 'Ajni'}], 'Nagpur South': [], 'Nagpur East': [], 'Nagpur Central': [], 'Nagpur West': [], 'Nagpur North (SC)': [], 'Kamthi': [], 'Ramtek': []}}
 
 @app.route('/')
 def index():
-    global data  # Use the global variable
-    data = get_data_from_postgres()
+    # global data  # Use the global variable
+    # data = get_data_from_postgres()
     return render_template('index.html', cities=list(data.keys()))
 
 @app.route('/get_regions/<district>', methods=['GET'])
