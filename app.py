@@ -90,9 +90,6 @@ def user():
         region_name = location_data.get('region', "").title()
         part_name = location_data.get('ward', "").title()
 
-
-        print(district_name, region_name, part_name)
-
         if not name and not voter_id:
             return render_template("users.html", error_message="Please Enter Name")
         
@@ -109,67 +106,59 @@ def user():
             # Check if user data is in the session
             user_data = session.get(name)
 
-            # fix this part
-            # add session and then fix this so it works as intended
-            if user_data:
-                print('user_data', user_data)
-                return render_template('redirect.html', address=user_data[0][5])
-            else:
-                # SQL query for cases with or without middle name
-                query = """
-                    SELECT v.first_name, v.middle_name, v.last_name, v.age, v.gender, vb.coordinates, v.voter_id, vb.polling_station_address
-                    FROM voters v
-                    JOIN booths vb ON v.booth_number = vb.booth_number
-                    JOIN parts p ON vb.part_id = p.part_id
-                    JOIN assemblyconstituencies ac ON p.constituency_id = ac.constituency_id
-                    JOIN districts d ON ac.district_id = d.district_id
-                    WHERE v.first_name = %s
-                    AND v.last_name = %s
-                    AND d.district_name = %s
-                    AND ac.constituency_name = %s
-                """
+            # SQL query for cases with or without middle name
+            query = """
+                SELECT v.first_name, v.middle_name, v.last_name, v.age, v.gender, vb.coordinates, v.voter_id, vb.polling_station_address, v.full_name
+                FROM voters v
+                JOIN booths vb ON v.booth_number = vb.booth_number
+                JOIN parts p ON vb.part_id = p.part_id
+                JOIN assemblyconstituencies ac ON p.constituency_id = ac.constituency_id
+                JOIN districts d ON ac.district_id = d.district_id
+                WHERE v.first_name = %s
+                AND v.last_name = %s
+                AND d.district_name = %s
+                AND ac.constituency_name = %s
+            """
 
-                parameters = [first_name, last_name, district_name, region_name]
-                # print(parameters)
+            parameters = [first_name, last_name, district_name, region_name]
 
-                if part_name:
-                    query += " AND p.part_name = %s"
-                    parameters.append(part_name)
+            if part_name:
+                query += " AND p.part_name = %s"
+                parameters.append(part_name)
 
-                if middle_name:
-                    query += " AND v.middle_name = %s"
-                    parameters.append(middle_name)
+            if middle_name:
+                query += " AND v.middle_name = %s"
+                parameters.append(middle_name)
 
-                # print('here')
+            try:
+                result = execute_query(query, parameters)
+                # if name conflict arrises
+                if len(result) > 1:
+                    # redirect to same page with option to pick your own data
+                    """
+                    Here will be the logic for using pagination
+                    """
+                    return render_template('users.html', result=result, show_table = True)
+                
+                # if single data
+                # add here a middle step
+                elif len(result) == 1:
+                    session[name] = result
+                    location = result[0][5]
+                    location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
+                    cpy = result[0][5].replace(' ', '')
+                    return render_template('restpage.html', result=result[0], location=location, cpy=cpy)
 
-                try:
-                    result = execute_query(query, parameters)
-                    print('result', result)
-                    # if name conflict arrises
-                    if len(result) > 1:
-                        # redirect to same page with option to pick your own data
-                        """
-                        Here will be the logic for using pagination
-                        """
-                        return render_template('users.html', result=result, show_table = True)
-                    
-                    # if single data
-                    # add here a middle step
-                    elif len(result) == 1:
-                        session[name] = result
-                        print(result)
-                        return render_template('redirect.html', address=result[0][5])
+                # If no results, show an error message
+                return render_template("users.html", error_message="No Data Found")
 
-                    # If no results, show an error message
-                    return render_template("users.html", error_message="No Data Found")
-
-                except Exception as e:
-                    return render_template("users.html", error_message=str(e))
+            except Exception as e:
+                return render_template("users.html", error_message=str(e))
                 
         elif voter_id:
             # Search by voter ID
             query = """
-                SELECT v.first_name, v.middle_name, v.last_name, v.gender, v.age, vb.coordinates
+                SELECT v.first_name, v.middle_name, v.last_name, v.gender, v.age, vb.coordinates, v.full_name
                 FROM voters v
                 JOIN booths vb ON v.booth_number = vb.booth_number
                 JOIN parts p ON vb.part_id = p.part_id
@@ -183,7 +172,7 @@ def user():
 
                 if len(result) == 1:
                     session[name] = result
-                    return render_template('redirect.html', address=result[0][5])
+                    return render_template('restpage.html', result=result[0])
                 else:
                     return render_template("users.html", error_message="No Data Found")
 
@@ -191,14 +180,32 @@ def user():
                 return render_template("users.html", error_message=str(e))
     else:
         candidates = session.get('candidates', [])
-        print(candidates)
         return render_template("users.html", candidates=candidates)
     
     
 @app.route("/redirect/<address>")
 def redirect(address):
-    # print('address', address)
-    return render_template("redirect.html", address=address)
+
+    query = """
+    SELECT vb.coordinates, vb.polling_station_address, v.full_name
+    FROM voters v
+    JOIN booths vb ON v.booth_number = vb.booth_number
+    JOIN parts p ON vb.part_id = p.part_id
+    JOIN assemblyconstituencies ac ON p.constituency_id = ac.constituency_id
+    JOIN districts d ON ac.district_id = d.district_id
+    WHERE vb.coordinates = %s
+    """
+
+    try:
+        result = execute_query(query, [address])
+        location=address
+        cpy = location.replace(' ', '')
+        location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
+        return render_template("multirestpage.html", result=result, location=location, cpy=cpy)
+    except Exception as e:
+        return render_template('users.html')
+
+
 
 # Error handlers
 @app.errorhandler(404)
