@@ -75,6 +75,11 @@
 		<!-- Include Leaflet JS -->
 		<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 		<script>
+			function copyLink() {
+				navigator.clipboard.writeText(
+					"https://www.google.com/maps/search/?api=1&query={{ result[5] }}"
+				);
+			}
 			// Function to simulate typing effect
 			function typeWriter(elementId, text, speed) {
 				const element = document.getElementById(elementId);

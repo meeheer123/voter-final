@@ -90,9 +90,6 @@ def user():
         region_name = location_data.get('region', "").title()
         part_name = location_data.get('ward', "").title()
 
-
-        print(district_name, region_name, part_name)
-
         if not name and not voter_id:
             return render_template("users.html", error_message="Please Enter Name")
         
@@ -109,12 +106,6 @@ def user():
             # Check if user data is in the session
             user_data = session.get(name)
 
-            # fix this part
-            # add session and then fix this so it works as intended
-            # if user_data:
-            #     print('user_data', user_data)
-            #     return render_template('redirect.html', address=user_data[0][5])
-            # else:
             # SQL query for cases with or without middle name
             query = """
                 SELECT v.first_name, v.middle_name, v.last_name, v.age, v.gender, vb.coordinates, v.voter_id, vb.polling_station_address, v.full_name
@@ -130,7 +121,6 @@ def user():
             """
 
             parameters = [first_name, last_name, district_name, region_name]
-            # print(parameters)
 
             if part_name:
                 query += " AND p.part_name = %s"
@@ -140,11 +130,8 @@ def user():
                 query += " AND v.middle_name = %s"
                 parameters.append(middle_name)
 
-            # print('here')
-
             try:
                 result = execute_query(query, parameters)
-                print('result', result)
                 # if name conflict arrises
                 if len(result) > 1:
                     # redirect to same page with option to pick your own data
@@ -157,7 +144,6 @@ def user():
                 # add here a middle step
                 elif len(result) == 1:
                     session[name] = result
-                    # print('a', result[0][0])
                     location = result[0][5]
                     location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
                     return render_template('restpage.html', result=result[0], location=location)
@@ -193,7 +179,6 @@ def user():
                 return render_template("users.html", error_message=str(e))
     else:
         candidates = session.get('candidates', [])
-        print(candidates)
         return render_template("users.html", candidates=candidates)
     
     
@@ -212,7 +197,6 @@ def redirect(address):
 
     try:
         result = execute_query(query, [address])
-        print('res', result)
         location=address
         location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
         return render_template("multirestpage.html", result=result, location=location)
