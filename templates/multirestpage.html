@@ -35,7 +35,7 @@
 						<a
 							style="float: left; margin-left: 20px"
 							href="https://ceo.maharashtra.gov.in/"
-							>Hello {{ result[-1] }}</a
+							>Hello {{ result[0][2] }}</a
 						>
 					</li>
 				</ul>
@@ -53,9 +53,7 @@
 			<!-- Leaflet map container -->
 			<div id="map"></div>
 			<button onclick="navigate()" class="buttonnavigate">Navigate</button>
-			<button onclick="copyLink()" class="buttoncopy" id="url">
-				Copy Link
-			</button>
+			<button onclick="copyLink()" class="buttoncopy">Copy Link</button>
 			<!-- <button onclick="shareOnWhatsApp()" class="buttonwhat">
 				Share on WhatsApp
 			</button> -->
@@ -104,13 +102,12 @@
 			}
 
 			// Set user details and initiate typing effect
-			const userName = " {{ result[-1] }} "; // Replace with actual user name
+			const userName = " {{ result[0][2] }} "; // Replace with actual user name
 			document.getElementById("userName").innerText = "";
 			typeWriter("userName", userName, 100); // Adjust the speed as needed
 
 			// Initialize Leaflet map
-			// Initialize Leaflet map
-			const resultCoordinates = "{{ result[5] }}";
+			const resultCoordinates = "{{ result[0][0] }}";
 
 			// Parse latitude and longitude as numbers
 			const [customLatitude, customLongitude] = resultCoordinates
@@ -161,7 +158,7 @@
 					lon = position.coords.longitude;
 
 					// Get the destination address from Jinja
-					var address = "{{ result[5] }}";
+					var address = "{{ result[0][0] }}";
 
 					// Call redirectToGoogleMaps only after getting the location
 					redirectToGoogleMaps(lat, lon, address);
@@ -184,7 +181,6 @@
 
 			function copyLink() {
 				// Implement link copy logic
-
 			}
 
 			function shareOnWhatsApp() {
