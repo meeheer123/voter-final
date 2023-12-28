@@ -35,7 +35,7 @@
 						<a
 							style="float: left; margin-left: 20px"
 							href="https://ceo.maharashtra.gov.in/"
-							>Hello {{ result[-1] }}</a
+							>Hello {{ result[0][2] }}</a
 						>
 					</li>
 				</ul>
@@ -94,29 +94,10 @@
 			}
 
 			// Set user details and initiate typing effect
-			const userName = " {{ result[-1] }} "; // Replace with actual user name
+			const userName = " {{ result[0][2] }} "; // Replace with actual user name
 			document.getElementById("userName").innerText = "";
 			typeWriter("userName", userName, 100); // Adjust the speed as needed
 
-			// Initialize Leaflet map
-			const resultCoordinates = result[5].split(",");
-
-			// Parse latitude and longitude as numbers
-			const customLatitude = parseFloat(resultCoordinates[0]);
-			const customLongitude = parseFloat(resultCoordinates[1]);
-
-			// Create Leaflet map
-			const map = L.map("map").setView([customLatitude, customLongitude], 15);
-
-			// Add OpenStreetMap tile layer
-			L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-				attribution: "© OpenStreetMap contributors",
-			}).addTo(map);
-
-			// Create a custom marker and add it to the map
-			const customMarker = L.marker([customLatitude, customLongitude]).addTo(
-				map
-			);
 
 			// Rest of your functions
 			function navigate() {
@@ -149,7 +130,7 @@
 					lon = position.coords.longitude;
 
 					// Get the destination address from Jinja
-					var address = "{{ result[5] }}";
+					var address = "{{ result[0][0] }}";
 
 					// Call redirectToGoogleMaps only after getting the location
 					redirectToGoogleMaps(lat, lon, address);
