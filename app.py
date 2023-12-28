@@ -210,6 +210,7 @@ def redirect(address):
 
     try:
         result = execute_query(query, [address])
+        print('res', result)
         return render_template("multirestpage.html", result=result)
     except Exception as e:
         return render_template('users.html')

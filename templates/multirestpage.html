@@ -54,9 +54,17 @@
 			<div id="map"></div>
 			<button onclick="navigate()" class="buttonnavigate">Navigate</button>
 			<button onclick="copyLink()" class="buttoncopy">Copy Link</button>
-			<button onclick="shareOnWhatsApp()" class="buttonwhat">
+			<!-- <button onclick="shareOnWhatsApp()" class="buttonwhat">
 				Share on WhatsApp
-			</button>
+			</button> -->
+			<a
+				href="whatsapp://send?text=GFG Example for whatsapp sharing"
+				data-action="share/whatsapp/share"
+				target="_blank"
+				class="buttonwhat"
+			>
+				Share to whatsapp
+			</a>
 		</div>
 		<footer>
 			<p>
@@ -98,6 +106,26 @@
 			document.getElementById("userName").innerText = "";
 			typeWriter("userName", userName, 100); // Adjust the speed as needed
 
+			// Initialize Leaflet map
+			const resultCoordinates = "{{ result[0][0] }}";
+
+			// Parse latitude and longitude as numbers
+			const [customLatitude, customLongitude] = resultCoordinates
+				.split(",")
+				.map(parseFloat);
+
+			// Create Leaflet map
+			const map = L.map("map").setView([customLatitude, customLongitude], 15);
+
+			// Add OpenStreetMap tile layer
+			L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+				attribution: "© OpenStreetMap contributors",
+			}).addTo(map);
+
+			// Create a custom marker and add it to the map
+			const customMarker = L.marker([customLatitude, customLongitude]).addTo(
+				map
+			);
 
 			// Rest of your functions
 			function navigate() {
