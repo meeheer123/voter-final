@@ -482,6 +482,11 @@ input {
 .container-table {
   margin: 3rem;
 }
+.paragraph{
+  color: #e90f0f;
+  font-weight: 800;
+  font-size: 15px;
+}
 
 .table1 {
   font-family: Arial, Helvetica, sans-serif;
@@ -505,7 +510,7 @@ body {
 }
 
 /* Adjustments for screens below 600px */
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
   body {
     font-size: 80%;
   }
@@ -571,7 +576,7 @@ body {
   input {
     width: 100%;
     box-sizing: border-box; /* Include padding and border in width calculation */
-  }
+  /* }
 
   .button {
     width: 80%;
@@ -582,7 +587,6 @@ body {
   }
 }
 
-/* Additional adjustments for screens below 400px */
 @media only screen and (max-width: 400px) {
   body {
     font-size: 70%;
@@ -625,19 +629,37 @@ body {
   input {
     width: 100%;
     box-sizing: border-box; /* Include padding and border in width calculation */
-  }
+  /* }
 
   .button {
     width: 70%;
   }
-
+  
   .table1 {
     font-size: 11px;
   }
 }
 
+
+@keyframes typing {
+  from,
+  to {
+    border-right-color: transparent;
+  }
+  50% {
+    border-right-color: #6fe5e5;
+  }
+} */ */ */
+
+.paragraph{
+  color: #e90f0f;
+  font-weight: 800;
+  font-size: medium;
+}
 #map {
-  height: 300px;
+  height: 400px;
+  width: 100%;
+
 }
 /* Styling for the typing effect */
 #userName {
@@ -651,18 +673,577 @@ body {
   animation: typing 1s steps(20) infinite;
 }
 
-@keyframes typing {
-  from,
-  to {
-    border-right-color: transparent;
+
+@media only screen and (max-width: 920px) {
+  body {
+    width: fit-content;
   }
-  50% {
-    border-right-color: #6fe5e5;
+
+
+  .form-container
+ {
+    margin: 5px;
+    padding: 5px;
+    height: 630px;
+  }
+
+  .table-container {
+    margin: 5px;
+    padding: 5px;
+
+  }
+  
+  input {
+    width: 93%;
+    margin-top: 7%;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+  }
+
+  .button {
+    width: 80%;
+  }
+
+  .buttoncopy {
+    display: inline-block;
+    margin: 9%;
+    padding: 12px 18px;
+    font-size: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #ffffff;
+    background-color: #324470;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  .buttonnavigate {
+    display: inline-block;
+    margin: 2%;
+    padding: 12px 18px;
+    font-weight: 700;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4778d3;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  .buttonwhat {
+    display: inline-block;
+    margin: 2%;
+    padding: 12px 18px;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4fea6e;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  #map {
+    height: 550px;
+  }
+  /* Styling for the typing effect */
+  #userName {
+    font-size: 40px;
+    font-weight: 800;
+    color: #2402cc;
+    margin-bottom: 10px;
+    overflow: hidden; /* Ensures the text won't overflow */
+    white-space: nowrap; /* Keeps the text in one line */
+    border-right: 2px solid #3586e2; /* Cursor blinking effect */
+    text-shadow: 2px 2px 4px rgba(0, 25, 114, 0.5);
+    animation: typing 1s steps(20) infinite;
+  }
+  
+  @keyframes typing {
+    from,
+    to {
+      border-right-color: transparent;
+    }
+    50% {
+      border-right-color: #6fe5e5;
+    }
+  }
+  
+  .paragraph{
+    color: #e90f0f;
+    font-weight: 800;
+    font-size: 25px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 80%;
+    width: fit-content;
+  }
+  .head-container{
+    height: 100%;
+  }
+  header{
+    padding: 40px 55px 55px;
+  }
+
+  header img {
+    position: static;
+    margin-bottom: 10px;
+    margin-left: 35px;
+    margin-top: 33px;
+    position: absolute;
+    left: 12px;
+    top: 4px;
+    height: 80px;
+    width: 80px;
+  }
+  
+  header h1 {
+    font-size: 3.1em;
+  }
+  
+  header h2 {
+    font-size: 1.9em;
+    margin: 0;
+  }
+
+  nav {
+    text-align: center;
+    display: block;
+    font-size: x-small;
+    background: url(menu_bg.jpg) repeat-x 0px 3px;
+    margin: 13px;
+    margin-top: 35px;
+    border: 0.5px solid navy;
+    border-radius: 5px 15px 5px;
+    height: 40px;
+    padding-top: 3px;
+    margin-bottom: 0px;
+  }
+
+  a:link{
+    font-family: georgia, times, serif;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.6em;
+    margin-bottom: 1%;
+  }
+  
+  label{
+    font-size: 40px;
+    font-weight: 600;
+  }
+  nav ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 0.8em;
+    margin-block-end: 0.8em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 20px;
+  }
+
+.form-container
+{
+  margin-top: 20px;
+   margin: 5px;
+   padding-top: 120px;
+   padding: 20px;
+   height: 999px;
+   font-size: medium;
+  }
+  .form-container h1{
+    margin-top: 20px;
+    padding: 5%;
+  }
+  
+  .table-container {
+    margin: 5px;
+    padding: 5px;
+    
+  }
+  .buttoncopy {
+    display: inline-block;
+    margin: 9%;
+    padding: 12px 18px;
+    font-size: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #ffffff;
+    background-color: #324470;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  .buttonnavigate {
+    display: inline-block;
+    margin: 2%;
+    padding: 12px 18px;
+    font-weight: 700;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4778d3;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  .buttonwhat {
+    display: inline-block;
+    margin: 2%;
+    padding: 12px 18px;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4fea6e;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  #map {
+    height: 1000px;
+  }
+  /* Styling for the typing effect */
+  #userName {
+    font-size: 70px;
+    font-weight: 800;
+    color: #2402cc;
+    margin-bottom: 10px;
+    overflow: hidden; /* Ensures the text won't overflow */
+    white-space: nowrap; /* Keeps the text in one line */
+    border-right: 2px solid #3586e2; /* Cursor blinking effect */
+    text-shadow: 2px 2px 4px rgba(0, 25, 114, 0.5);
+    animation: typing 1s steps(20) infinite;
+  }
+  
+  @keyframes typing {
+    from,
+    to {
+      border-right-color: transparent;
+    }
+    50% {
+      border-right-color: #6fe5e5;
+    }
+  }
+  
+  .paragraph{
+    color: #e90f0f;
+    font-weight: 800;
+    font-size: 35px;
+  }
+  label{
+    font-size: 40px;
+    margin-top: 10%;
+    font-weight: 600;
+    padding: 5%;
+  }
+  input {
+    width: 93%;
+    margin-top: 7%;
+    padding: 2%;
+    font-size: 28px;
+    border: solid 1px;
+    box-sizing: 20px;  /* Include padding and border in width calculation */
+  }
+
+  .button {
+    width: 90%;
+    font-size: 35px;
+  }
+
+  .table1 {
+    font-size: 14px;
+  }
+  .buttoncopy {
+    display: inline-block;
+    margin: 9%;
+    padding: 12px 18px;
+    font-size: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #ffffff;
+    background-color: #324470;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  .buttonnavigate {
+    display: inline-block;
+    margin: 2%;
+    padding: 12px 18px;
+    font-weight: 700;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4778d3;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  .buttonwhat {
+    display: inline-block;
+    margin: 2%;
+    padding: 12px 18px;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4fea6e;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  #map {
+    height: 550px;
+  }
+  /* Styling for the typing effect */
+  #userName {
+    font-size: 40px;
+    font-weight: 800;
+    color: #2402cc;
+    margin-top: 40%;
+    margin-bottom: 10px;
+    overflow: hidden; /* Ensures the text won't overflow */
+    white-space: nowrap; /* Keeps the text in one line */
+    border-right: 2px solid #3586e2; /* Cursor blinking effect */
+    text-shadow: 2px 2px 4px rgba(0, 25, 114, 0.5);
+    animation: typing 1s steps(20) infinite;
+  }
+  
+  @keyframes typing {
+    from,
+    to {
+      border-right-color: transparent;
+    }
+    50% {
+      border-right-color: #6fe5e5;
+    }
+  }
+  
+  .paragraph{
+    color: #e90f0f;
+    font-weight: 800;
+    font-size: 25px;
   }
 }
 
-.paragraph{
-  color: #e90f0f;
-  font-weight: 800;
-  font-size: medium;
+
+/* for 450px */
+@media only screen and (max-width: 450px) {
+  body {
+    font-size: 80%;
+    width: fit-content;
+  }
+  .head-container{
+    height: 100%;
+  }
+  header{
+    padding: 40px 55px 55px;
+  }
+
+  header img {
+    position: static;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    margin-top: 43px;
+    position: absolute;
+    left: 12px;
+    top: 4px;
+    height: 80px;
+    width: 80px;
+  }
+  
+  header h1 {
+    font-size: 3.3em;
+  }
+  
+  header h2 {
+    font-size: 2.2em;
+    margin: 0;
+  }
+
+  nav {
+    text-align: center;
+    display: block;
+    font-size: x-small;
+    background: url(menu_bg.jpg) repeat-x 0px 4px;
+    margin: 23px;
+    margin-top: 65px;
+    border: 0.5px solid navy;
+    border-radius: 5px 15px 5px;
+    height: 50px;
+    padding-top: 3px;
+    margin-bottom: 0px;
+  }
+
+  a:link{
+    font-family: georgia, times, serif;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 2.4em;
+    margin-bottom: 1%;
+    padding: 1.5%;
+  }
+  
+
+  nav ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 0.8em;
+    margin-block-end: 0.8em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 20px;
+  }
+
+.form-container
+{
+  margin-top: 20px;
+   margin: 5px;
+   padding-top: 120px;
+   padding: 20px;
+   height: 1500px;
+   font-size: medium;
+  }
+  
+  .table-container {
+    margin: 5px;
+    padding: 5px;
+    
+  }
+  .buttoncopy {
+    display: inline-block;
+    margin: 5%;
+    margin-top: 10%;
+    padding: 12px 18px;
+    font-size: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #ffffff;
+    background-color: #324470;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  .buttonnavigate {
+    display: inline-block;
+    margin: 2%;
+    padding: 12px 18px;
+    font-weight: 700;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4778d3;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  .buttonwhat {
+    display: inline-block;
+    margin: 2%;
+    padding: 12px 18px;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4fea6e;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  #map {
+    height: 2000px;
+  }
+  /* Styling for the typing effect */
+  #userName {
+    font-size: 45px;
+    font-weight: 600;
+    color: #2402cc;
+    margin-bottom: 10px;
+    overflow: hidden; /* Ensures the text won't overflow */
+    white-space: nowrap; /* Keeps the text in one line */
+    border-right: 2px solid #3586e2; /* Cursor blinking effect */
+    text-shadow: 2px 2px 4px rgba(0, 25, 114, 0.5);
+    animation: typing 1s steps(20) infinite;
+  }
+  
+  @keyframes typing {
+    from,
+    to {
+      border-right-color: transparent;
+    }
+    50% {
+      border-right-color: #6fe5e5;
+    }
+  }
+  
+  .paragraph{
+    color: #e90f0f;
+    font-weight: 800;
+    font-size: 35px;
+  }
+  label{
+    font-size: 50px;
+    margin-top: 20%;
+    margin-bottom: 15%;
+    font-weight: 700;
+  }
+  input {
+    width: 93%;
+    margin-top: 7%;
+    padding: 5%;
+    font-size: 48px;
+    border: solid 1px;
+    box-sizing: 60px;  /* Include padding and border in width calculation */
+  }
+
+  .button {
+    width: 90%;
+    padding: 12px 18px;
+    font-size: 25px;
+    margin-top: 10%;
+  }
+
+  .table1 {
+    font-size: 14px;
+  }
 }
+
+/* Additional adjustments for screens below 400px */

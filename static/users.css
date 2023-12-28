@@ -101,6 +101,7 @@ h2 {
   font-weight: bold;
 }
 
+
 nav {
   text-align: center;
   display: block;
@@ -145,6 +146,14 @@ ul {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
+}
+
+marquee{
+  color: #ff0000;
+  font-weight:600;
+  background-color: #d6fa07;
+  padding: 1%;
+  height: 30px;
 }
 
 article {
@@ -382,6 +391,7 @@ input{
   padding: 2%;
   color: #0016a8;
   border-radius: 1%;
+  /* height: ; */
 }
 
 .table-container{
@@ -418,16 +428,52 @@ body {
 }
 
 /* Adjustments for screens below 600px */
+@media only screen and (max-width: 920px) {
+  body {
+    width: fit-content;
+  }
+
+
+  .form-container
+ {
+    margin: 5px;
+    padding: 5px;
+    height: 630px;
+  }
+
+  .table-container {
+    margin: 5px;
+    padding: 5px;
+
+  }
+  
+  input {
+    width: 93%;
+    margin-top: 7%;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+  }
+
+  .button {
+    width: 80%;
+  }
+}
 @media only screen and (max-width: 600px) {
   body {
     font-size: 80%;
+    width: fit-content;
+  }
+  .head-container{
+    height: 100%;
+  }
+  header{
+    padding: 40px 55px 55px;
   }
 
   header img {
     position: static;
     margin-bottom: 10px;
-    margin-left: 45px;
-    margin-top: 5px;
+    margin-left: 35px;
+    margin-top: 33px;
     position: absolute;
     left: 12px;
     top: 4px;
@@ -436,11 +482,11 @@ body {
   }
   
   header h1 {
-    font-size: 2.2em;
+    font-size: 3.1em;
   }
   
   header h2 {
-    font-size: 1.2em;
+    font-size: 1.9em;
     margin: 0;
   }
 
@@ -448,11 +494,12 @@ body {
     text-align: center;
     display: block;
     font-size: x-small;
-    background: url(menu_bg.jpg) repeat-x 0px -3px;
-    margin-top: 10px;
+    background: url(menu_bg.jpg) repeat-x 0px 3px;
+    margin: 13px;
+    margin-top: 35px;
     border: 0.5px solid navy;
     border-radius: 5px 15px 5px;
-    height: 25px;
+    height: 40px;
     padding-top: 3px;
     margin-bottom: 0px;
   }
@@ -465,6 +512,10 @@ body {
     margin-bottom: 1%;
   }
   
+  label{
+    font-size: 40px;
+    font-weight: 600;
+  }
   nav ul {
     display: block;
     list-style-type: disc;
@@ -473,21 +524,171 @@ body {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 20px;
-}
+  }
 
-  .form-container,
+.form-container
+{
+  margin-top: 20px;
+   margin: 5px;
+   padding-top: 120px;
+   padding: 20px;
+   height: 999px;
+   font-size: medium;
+  }
+  
   .table-container {
     margin: 5px;
     padding: 5px;
+    
   }
-  
+  #voting-id::placeholder {
+    color: rgb(5, 5, 6);
+    font-size: 28px;
+    font-weight: 700;
+  }
+  #voting-name::placeholder {
+    color: rgb(10, 10, 11);
+    font-size: 28px;
+    font-weight: 700;
+  }
+  label{
+    font-size: 40px;
+    margin-top: 10%;
+    font-weight: 600;
+  }
   input {
-    width: 100%;
-    box-sizing: border-box; /* Include padding and border in width calculation */
+    width: 93%;
+    margin-top: 7%;
+    padding: 2%;
+    font-size: 28px;
+    border: solid 1px;
+    box-sizing: 20px;  /* Include padding and border in width calculation */
   }
 
   .button {
-    width: 80%;
+    width: 90%;
+    font-size: 35px;
+  }
+
+  .table1 {
+    font-size: 14px;
+  }
+}
+
+
+/* for 450px */
+@media only screen and (max-width: 450px) {
+  body {
+    font-size: 80%;
+    width: fit-content;
+  }
+  .head-container{
+    height: 100%;
+  }
+  header{
+    padding: 40px 55px 55px;
+  }
+
+  header img {
+    position: static;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    margin-top: 43px;
+    position: absolute;
+    left: 12px;
+    top: 4px;
+    height: 80px;
+    width: 80px;
+  }
+  
+  header h1 {
+    font-size: 3.3em;
+  }
+  
+  header h2 {
+    font-size: 2.2em;
+    margin: 0;
+  }
+
+  nav {
+    text-align: center;
+    display: block;
+    font-size: x-small;
+    background: url(menu_bg.jpg) repeat-x 0px 4px;
+    margin: 23px;
+    margin-top: 65px;
+    border: 0.5px solid navy;
+    border-radius: 5px 15px 5px;
+    height: 50px;
+    padding-top: 3px;
+    margin-bottom: 0px;
+  }
+
+  a:link{
+    font-family: georgia, times, serif;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 2.4em;
+    margin-bottom: 1%;
+    padding: 1.5%;
+  }
+  
+
+  nav ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 0.8em;
+    margin-block-end: 0.8em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 20px;
+  }
+
+.form-container
+{
+  margin-top: 20px;
+   margin: 5px;
+   padding-top: 120px;
+   padding: 20px;
+   height: 1400px;
+   font-size: medium;
+  }
+  
+  .table-container {
+    margin: 5px;
+    padding: 5px;
+    
+  }
+  #voting-id::placeholder {
+    color: rgb(5, 5, 6);
+    font-size: 48px;
+    font-weight: 700;
+  }
+  #voting-name::placeholder {
+    color: rgb(10, 10, 11);
+    font-size: 48px;
+    font-weight: 700;
+  }
+  label{
+    font-size: 50px;
+    margin-top: 20%;
+    margin-bottom: 15%;
+    font-weight: 700;
+  }
+  input {
+    width: 93%;
+    margin-top: 7%;
+    padding: 5%;
+    font-size: 48px;
+    border: solid 1px;
+    box-sizing: 60px;  /* Include padding and border in width calculation */
+  }
+
+  .button {
+    width: 90%;
+    padding: 12px 18px;
+    font-size: 25px;
+    margin-top: 10%;
   }
 
   .table1 {
@@ -496,58 +697,3 @@ body {
 }
 
 /* Additional adjustments for screens below 400px */
-@media only screen and (max-width: 400px) {
-  body {
-    font-size: 70%;
-  }
-  
-  header img {
-    position: static;
-    margin-bottom: 4px;
-    position: absolute;
-    left: 5px;
-    top: 2px;
-    height: 60px;
-    width: 60px;
-  }
-
-  header h1 {
-    font-size: 2.1em;
-  }
-
-  header h2 {
-    font-size: 1.1em;
-    margin: 0;
-  }
-
-  nav {
-    height: auto;
-  }
-
-  nav ul {
-    display: block;
-    margin-top: 10px;
-  }
-
-  .form-container,
-  .table-container {
-    margin: 5px;
-    padding: 5px;
-  }
-
-  input {
-    width: 100%;
-    box-sizing: border-box; /* Include padding and border in width calculation */
-  }
-
-  .button {
-    width: 70%;
-  }
-
-  .table1 {
-    font-size: 11px;
-  }
-}
-
-
-
