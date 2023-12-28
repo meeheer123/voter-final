@@ -52,14 +52,12 @@
 			<!-- Leaflet map container -->
 			<div id="map"></div>
 			<button onclick="navigate()" class="buttonnavigate">Navigate</button>
-			<button onclick="copyLink()" class="buttoncopy" id="url">
-				Copy Link
-			</button>
+			<button onclick="copyLink()" class="buttoncopy">Copy Link</button>
 			<!-- <button onclick="shareOnWhatsApp()" class="buttonwhat">
 				Share on WhatsApp
 			</button> -->
 			<a
-				href="whatsapp://send?text=GFG Example for whatsapp sharing"
+				href="whatsapp://send?text=https://www.google.com/maps/search/?api=1%26query={{ location }}"
 				data-action="share/whatsapp/share"
 				target="_blank"
 				class="buttonwhat"
@@ -76,6 +74,11 @@
 		<!-- Include Leaflet JS -->
 		<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 		<script>
+			function copyLink() {
+				navigator.clipboard.writeText(
+					"https://www.google.com/maps/search/?api=1&query={{ cpy }}"
+				);
+			}
 			// Function to simulate typing effect
 			function typeWriter(elementId, text, speed) {
 				const element = document.getElementById(elementId);
@@ -179,15 +182,6 @@
 
 				// Call getLocation to start the geolocation process
 				getLocation();
-			}
-
-			function copyLink() {
-				// Implement link copy logic
-
-			}
-
-			function shareOnWhatsApp() {
-				// Implement WhatsApp sharing logic
 			}
 		</script>
 	</body>
