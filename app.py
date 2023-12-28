@@ -158,7 +158,9 @@ def user():
                 elif len(result) == 1:
                     session[name] = result
                     # print('a', result[0][0])
-                    return render_template('restpage.html', result=result[0])
+                    location = result[0][5]
+                    location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
+                    return render_template('restpage.html', result=result[0], location=location)
 
                 # If no results, show an error message
                 return render_template("users.html", error_message="No Data Found")
@@ -211,7 +213,9 @@ def redirect(address):
     try:
         result = execute_query(query, [address])
         print('res', result)
-        return render_template("multirestpage.html", result=result)
+        location=address
+        location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
+        return render_template("multirestpage.html", result=result, location=location)
     except Exception as e:
         return render_template('users.html')
 
