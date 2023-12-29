@@ -28,6 +28,8 @@ def get_regions(district):
 @app.route('/get_wards/<district>/<region>', methods=['GET'])
 def get_wards(district, region):
     region_data = session['data'].get(district, {}).get(region, [])
+    session['region_data'] = {'city':district, 'region':region}
+    session['candidates'] = get_candidates_for_location(session['region_data'])
     return jsonify(region_data)
 
 @app.route('/submit_form', methods=['POST'])
