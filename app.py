@@ -83,8 +83,7 @@ def user():
         name = request.form.get("name").lower().title()
         voter_id = request.form.get("voting-id")
         location_data = session.get('location_data', {})
-        candidates = session.get('candidates', [])
-        print(candidates)
+        # candidates = session.get('candidates', [])
         district_name = location_data.get('city', "").title()
         region_name = location_data.get('region', "").title()
         part_name = location_data.get('ward', "").title()
@@ -142,7 +141,7 @@ def user():
                 # if single data
                 # add here a middle step
                 elif len(result) == 1:
-                    session[name] = result
+                    # session[name] = result
                     location = result[0][5]
                     location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
                     cpy = result[0][5].replace(' ', '')
@@ -170,7 +169,7 @@ def user():
                 result = execute_query(query, [voter_id])
 
                 if len(result) == 1:
-                    session[name] = result
+                    # session[name] = result
                     return render_template('restpage.html', result=result[0])
                 else:
                     return render_template("users.html", error_message="No Data Found")
