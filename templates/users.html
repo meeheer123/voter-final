@@ -6,6 +6,9 @@
     <title>Voting Path</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='users.css') }}">
 	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='image/eci.jpg') }}">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.css">
+	<!-- Include Bootstrap CSS (optional) -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <img src="{{ url_for('static', filename='image/election-logo.png') }}" /> -->
 </head>
 <body>
@@ -39,16 +42,27 @@
 	
 		   <label for="voter-name">Enter your name:</label>
 		   <!-- Use the "datalist" attribute to associate the input with the datalist element -->
-		   <input type="search" name="name" id="voting-name" placeholder="Enter Name" list="candidates">
-		   <!-- Define the datalist with the ID "candidates" -->
-		   <datalist id="candidates">
-			   <!-- Use a Jinja for loop to iterate over the candidates and display them as options -->
-			   <!-- {% for candidate in candidates %}
-				   <option value="{{ candidate[0] }}">
-			   {% endfor %} -->
-		   </datalist>
+		   <input type="search" name="name" id="voting-name" class="typeahead form-control" placeholder="Enter Name">
             <input type="submit" class="button" value="Search" >
         </form>
+		<!-- Include jQuery (required) -->
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<!-- Include Bootstrap JS (optional) -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<!-- Include Typeahead.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+
+		<script>
+			$(document).ready(function () {
+				// Define your data source (you can replace this with your own data source)
+				var countries = {{ candidates | safe }}
+
+				// Initialize Typeahead on the input field
+				$('.typeahead').typeahead({
+					source: countries
+				});
+			});
+		</script>
 		
     </div>
 

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for, session
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session, json
 from data import get_data_from_postgres, get_candidates_for_location
 import psycopg2
 
@@ -179,8 +179,21 @@ def user():
             except Exception as e:
                 return render_template("users.html", error_message=str(e))
     else:
-        candidates = session.get('candidates', [])
-        return render_template("users.html", candidates=candidates)
+        connection = psycopg2.connect(**db_params)
+        cursor = connection.cursor()
+        query = """
+            SELECT v.full_name as candidate_info
+            FROM voters v
+            JOIN booths vb ON v.booth_number = vb.booth_number
+            JOIN parts p ON vb.part_id = p.part_id
+            JOIN assemblyconstituencies ac ON p.constituency_id = ac.constituency_id
+            JOIN districts d ON ac.district_id = d.district_id
+        """
+        
+        cursor.execute(query)
+        candidates = cursor.fetchall()
+        carr = [candidates[x][0] for x in range(0, len(candidates))]
+        return render_template("users.html", candidates=json.dumps(carr))
     
     
 @app.route("/redirect/<address>")

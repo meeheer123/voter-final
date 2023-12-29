@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typeahead.js Example</title>
+    <!-- Include Bootstrap CSS (optional) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Typeahead.js CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Typeahead.js Example</h1>
+    <input type="text" class="typeahead form-control" placeholder="Start typing...">
+</div>
+
+<!-- Include jQuery (required) -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Include Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Include Typeahead.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Define your data source (you can replace this with your own data source)
+        var countries = ['United States', 'Canada', 'United Kingdom', 'Germany', 'France', 'Italy', 'Spain'];
+
+        // Initialize Typeahead on the input field
+        $('.typeahead').typeahead({
+            source: countries
+        });
+    });
+</script>
+
+</body>
+</html>
