@@ -13,23 +13,21 @@ db_params = {
     'port': 5432
 }
 
-data = {}
-
 @app.route('/')
 def index():
-    global data  # Use the global variable
     data = get_data_from_postgres()
+    session['data'] = data
     return render_template('index.html', cities=list(data.keys()))
 
 @app.route('/get_regions/<district>', methods=['GET'])
 def get_regions(district):
-    district_data = data.get(district, {})
+    district_data = session['data'].get(district, {})
     regions = list(district_data.keys())
     return jsonify(regions)
 
 @app.route('/get_wards/<district>/<region>', methods=['GET'])
 def get_wards(district, region):
-    region_data = data.get(district, {}).get(region, [])
+    region_data = session['data'].get(district, {}).get(region, [])
     return jsonify(region_data)
 
 @app.route('/submit_form', methods=['POST'])
