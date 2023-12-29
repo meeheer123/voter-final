@@ -1,9 +1,13 @@
-
-
-form {
-  display: block;
-  margin-top: 0em;
+html, body {
+  touch-action: manipulation;
+  overflow: hidden;
+  zoom: 1;
 }
+.maincontainer{
+  width: 100%;
+}
+
+
 body {
   background: gray;
   font-family: "Myriad Pro" , Myriad, Helvetica, Arial, sans-serif;
@@ -24,6 +28,10 @@ body {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
+}
+form {
+  display: block;
+  margin-top: 0em;
 }
 
 div {
@@ -151,6 +159,7 @@ ul {
 marquee{
   color: #ff0000;
   font-weight:600;
+  font-size: 27px;
   background-color: #d6fa07;
   padding: 1%;
   height: 30px;
@@ -431,6 +440,7 @@ body {
 @media only screen and (max-width: 920px) {
   body {
     width: fit-content;
+    zoom: 0.8;
   }
 
 
@@ -458,9 +468,10 @@ body {
   }
 }
 @media only screen and (max-width: 600px) {
-  body {
+  body,html {
     font-size: 80%;
     width: fit-content;
+    zoom: 0.6;
   }
   .head-container{
     height: 100%;
@@ -578,9 +589,10 @@ body {
 
 /* for 450px */
 @media only screen and (max-width: 450px) {
-  body {
+  body,html {
     font-size: 80%;
     width: fit-content;
+    zoom: 0.65;
   }
   .head-container{
     height: 100%;

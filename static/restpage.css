@@ -1,7 +1,9 @@
-form {
-  display: block;
-  margin-top: 0em;
+html, body {
+  touch-action: manipulation;
+  overflow: hidden;
+  zoom: 1;
 }
+
 body {
   background: gray;
   font-family: "Myriad Pro", Myriad, Helvetica, Arial, sans-serif;
@@ -24,6 +26,10 @@ body {
   -o-border-radius: 5px;
 }
 
+form {
+  display: block;
+  margin-top: 0em;
+}
 div {
   display: block;
 }
@@ -649,17 +655,12 @@ body {
   50% {
     border-right-color: #6fe5e5;
   }
-} */ */ */
+} */ 
 
 .paragraph{
   color: #e90f0f;
   font-weight: 800;
   font-size: medium;
-}
-#map {
-  height: 400px;
-  width: 100%;
-
 }
 /* Styling for the typing effect */
 #userName {
@@ -684,7 +685,7 @@ body {
  {
     margin: 5px;
     padding: 5px;
-    height: 630px;
+    height: 730px;
   }
 
   .table-container {
@@ -752,7 +753,7 @@ body {
     box-shadow: 0 9px #999;
   }
   #map {
-    height: 550px;
+    height: 400px;
   }
   /* Styling for the typing effect */
   #userName {
@@ -873,7 +874,7 @@ body {
   }
   .buttoncopy {
     display: inline-block;
-    margin: 9%;
+    margin: 2%;
     padding: 12px 18px;
     font-size: 25px;
     font-weight: 700;
@@ -919,9 +920,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 9px #999;
   }
-  #map {
-    height: 1000px;
-  }
+
   /* Styling for the typing effect */
   #userName {
     font-size: 70px;
@@ -1022,7 +1021,7 @@ body {
     box-shadow: 0 9px #999;
   }
   #map {
-    height: 550px;
+    height: 650px;
   }
   /* Styling for the typing effect */
   #userName {
@@ -1058,9 +1057,10 @@ body {
 
 /* for 450px */
 @media only screen and (max-width: 450px) {
-  body {
+  body,html {
     font-size: 80%;
     width: fit-content;
+    zoom: 0.65;
   }
   .head-container{
     height: 100%;
@@ -1189,7 +1189,7 @@ body {
     box-shadow: 0 9px #999;
   }
   #map {
-    height: 2000px;
+    height: 800px;
   }
   /* Styling for the typing effect */
   #userName {
