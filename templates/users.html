@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting Path</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">   
+    </script>   
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">   
+    </script>
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+	rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='users.css') }}">
 	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='image/eci.jpg') }}">
     <!-- <img src="{{ url_for('static', filename='image/election-logo.png') }}" /> -->
@@ -39,14 +46,7 @@
 	
 		   <label for="voter-name">Enter your name:</label>
 		   <!-- Use the "datalist" attribute to associate the input with the datalist element -->
-		   <input type="search" name="name" id="voting-name" placeholder="Enter Name" list="candidates">
-		   <!-- Define the datalist with the ID "candidates" -->
-		   <datalist id="candidates">
-			   <!-- Use a Jinja for loop to iterate over the candidates and display them as options -->
-			   <!-- {% for candidate in candidates %}
-				   <option value="{{ candidate[0] }}">
-			   {% endfor %} -->
-		   </datalist>
+		   <input type="search" name="name" id="voting-name" placeholder="Enter Name">
             <input type="submit" class="button" value="Search" >
         </form>
 		
@@ -106,8 +106,19 @@
 </div>
 <footer>
 	<p>Copyright © 2013 Office of the Chief Electoral Officer, Maharashtra, All rights reserved.</p>
-				
 </footer>
 </div>
+<script>
+	$( function() { 
+    var availableTags = [ 
+        {% for candidate in candidates %} 
+            "{{candidate}}", 
+        {% endfor %} 
+    ]; 
+    $( "#voting-name" ).autocomplete({ 
+      source: availableTags 
+    }); 
+  } ); 
+</script>
 </body>
 </html>

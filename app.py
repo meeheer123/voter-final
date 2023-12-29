@@ -33,8 +33,8 @@ def get_wards(district, region):
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     location_data = request.json
-    session['location_data'] = location_data
     candidates = get_candidates_for_location(location_data)
+    session['location_data'] = location_data
     session['candidates'] = candidates
     return redirect(url_for('user'))
 
@@ -84,6 +84,7 @@ def user():
         voter_id = request.form.get("voting-id")
         location_data = session.get('location_data', {})
         candidates = session.get('candidates', [])
+        print(candidates)
         district_name = location_data.get('city', "").title()
         region_name = location_data.get('region', "").title()
         part_name = location_data.get('ward', "").title()
@@ -102,7 +103,7 @@ def user():
             middle_name = name_parts[1] if len(name_parts) > 2 else None
 
             # Check if user data is in the session
-            user_data = session.get(name)
+            # user_data = session.get(name)
 
             # SQL query for cases with or without middle name
             query = """
@@ -178,6 +179,7 @@ def user():
                 return render_template("users.html", error_message=str(e))
     else:
         candidates = session.get('candidates', [])
+        candidates = [candidates[x][0] for x in range(0, len(candidates))]
         return render_template("users.html", candidates=candidates)
     
     
