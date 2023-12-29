@@ -28,14 +28,16 @@ def get_regions(district):
 @app.route('/get_wards/<district>/<region>', methods=['GET'])
 def get_wards(district, region):
     region_data = session['data'].get(district, {}).get(region, [])
+    session['region_data'] = {'city':district, 'region':region}
+    session['candidates'] = get_candidates_for_location(session['region_data'])
     return jsonify(region_data)
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     location_data = request.json
-    session['location_data'] = location_data
     candidates = get_candidates_for_location(location_data)
-    session['candidates'] = candidates
+    session['location_data'] = location_data
+    # session['candidates'] = candidates
     return redirect(url_for('user'))
 
 
@@ -83,7 +85,7 @@ def user():
         name = request.form.get("name").lower().title()
         voter_id = request.form.get("voting-id")
         location_data = session.get('location_data', {})
-        candidates = session.get('candidates', [])
+        # candidates = session.get('candidates', [])
         district_name = location_data.get('city', "").title()
         region_name = location_data.get('region', "").title()
         part_name = location_data.get('ward', "").title()
@@ -102,7 +104,7 @@ def user():
             middle_name = name_parts[1] if len(name_parts) > 2 else None
 
             # Check if user data is in the session
-            user_data = session.get(name)
+            # user_data = session.get(name)
 
             # SQL query for cases with or without middle name
             query = """
@@ -141,7 +143,7 @@ def user():
                 # if single data
                 # add here a middle step
                 elif len(result) == 1:
-                    session[name] = result
+                    # session[name] = result
                     location = result[0][5]
                     location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
                     cpy = result[0][5].replace(' ', '')
@@ -169,7 +171,7 @@ def user():
                 result = execute_query(query, [voter_id])
 
                 if len(result) == 1:
-                    session[name] = result
+                    # session[name] = result
                     return render_template('restpage.html', result=result[0])
                 else:
                     return render_template("users.html", error_message="No Data Found")
@@ -178,6 +180,7 @@ def user():
                 return render_template("users.html", error_message=str(e))
     else:
         candidates = session.get('candidates', [])
+        candidates = [candidates[x][0] for x in range(0, len(candidates))]
         return render_template("users.html", candidates=candidates)
     
     
