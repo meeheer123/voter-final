@@ -280,8 +280,9 @@ p {
 
 .button {
     display: inline-block;
-    padding: 12px 18px;
-    font-size: 15px;
+    padding: 8px 14px;
+    width: 50%;
+    font-size: 20px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -290,7 +291,7 @@ p {
     background-color: #4778d3;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 6px #999;
+    box-shadow: 0 2px #999;
   }
   
   .button:hover {background-color: #0016a8}
