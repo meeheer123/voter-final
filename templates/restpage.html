@@ -49,6 +49,8 @@
 		<div class="form-container">
 			<h1>Hello, <span id="userName"></span></h1>
 			<p class="paragraph">Your voting center is located at:</p>
+			<br />
+			<p class="location">{{ result[7] }}</p>
 			<!-- Leaflet map container -->
 			<div id="map"></div>
 			<button onclick="navigate()" class="buttonnavigate">Navigate</button>
@@ -182,7 +184,9 @@
 		<script>
 			function shareToWhatsApp(location) {
 				// Replace this with your logic to open WhatsApp with the desired location
-				window.location.href = "whatsapp://send?text=https://www.google.com/maps/search/?api=1%26query=" + location;
+				window.location.href =
+					"whatsapp://send?text=https://www.google.com/maps/search/?api=1%26query=" +
+					location;
 			}
 		</script>
 	</body>
