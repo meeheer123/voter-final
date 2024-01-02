@@ -37,7 +37,7 @@ def submit_form():
     location_data = request.json
     candidates = get_candidates_for_location(location_data)
     session['location_data'] = location_data
-    # session['candidates'] = candidates
+    session['candidates'] = candidates
     return redirect(url_for('user'))
 
 

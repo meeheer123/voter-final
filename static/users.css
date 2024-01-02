@@ -163,8 +163,9 @@ marquee {
 	font-weight: 600;
 	font-size: 27px;
 	background-color: #d6fa07;
-	padding: 1%;
+	padding: 10px;
 	height: 30px;
+	margin: auto;
 }
 
 article {
@@ -306,6 +307,18 @@ td {
 	text-align: left;
 }
 
+::placeholder {
+	opacity: 0.5;
+	color: grey;
+}
+
+.ui-autocomplete {
+	font-size: 20px; /* Adjust the font size as needed */
+}
+.ui-autocomplete > li {
+	line-height: 30px; /* Adjust the line height as needed */
+}
+
 .bordered tr:last-child td:last-child {
 	-moz-border-radius: 0 0 6px 0;
 	-webkit-border-radius: 0 0 6px 0;
@@ -351,8 +364,9 @@ p {
 
 .button {
 	display: inline-block;
+	width: 60%;
 	padding: 12px 18px;
-	font-size: 15px;
+	font-size: 25px;
 	cursor: pointer;
 	text-align: center;
 	text-decoration: none;
@@ -411,7 +425,11 @@ input {
 	padding: 2%;
 	color: #0016a8;
 	border-radius: 1%;
-	/* height: ; */
+}
+
+#voting-id,
+#voting-name {
+	margin-left: 2rem;
 }
 
 .table-container {
@@ -450,10 +468,10 @@ body {
 @media only screen and (max-width: 920px) {
 	body {
 		.ui-autocomplete {
-			font-size: 20px; /* Adjust the font size as needed */
+			font-size: 50px; /* Adjust the font size as needed */
 		}
 		.ui-autocomplete > li {
-			line-height: 35px; /* Adjust the line height as needed */
+			line-height: 70px; /* Adjust the line height as needed */
 		}
 		width: fit-content;
 	}
@@ -477,6 +495,13 @@ body {
 	.button {
 		width: 80%;
 	}
+
+	#sub {
+		font-size: 40px;
+		width: 40%;
+		height: 6rem;
+		margin-top: 50px;
+	}
 }
 @media only screen and (max-width: 600px) {
 	body,
@@ -493,10 +518,10 @@ body {
 	}
 
 	.ui-autocomplete {
-		font-size: 20px; /* Adjust the font size as needed */
+		font-size: 50px; /* Adjust the font size as needed */
 	}
 	.ui-autocomplete > li {
-		line-height: 35px; /* Adjust the line height as needed */
+		line-height: 70px; /* Adjust the line height as needed */
 	}
 
 	header img {
@@ -629,10 +654,10 @@ body {
 	}
 
 	.ui-autocomplete {
-		font-size: 20px; /* Adjust the font size as needed */
+		font-size: 50px; /* Adjust the font size as needed */
 	}
 	.ui-autocomplete > li {
-		line-height: 35px; /* Adjust the line height as needed */
+		line-height: 70px; /* Adjust the line height as needed */
 	}
 
 	header h1 {
