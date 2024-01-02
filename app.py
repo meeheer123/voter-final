@@ -147,7 +147,6 @@ def user():
                     location = result[0][5]
                     location = location.replace('&', '%26').replace(',', '%2C').replace('.', '%2E').replace(' ', '')
                     cpy = result[0][5].replace(' ', '')
-                    print(result)
                     return render_template('restpage.html', result=result[0], location=location, cpy=cpy)
 
                 # If no results, show an error message
