@@ -56,14 +56,9 @@
 			<!-- <button onclick="shareOnWhatsApp()" class="buttonwhat">
 				Share on WhatsApp
 			</button> -->
-			<a
-				href="whatsapp://send?text=https://www.google.com/maps/search/?api=1%26query={{ location }}"
-				data-action="share/whatsapp/share"
-				target="_blank"
-				class="buttonwhat"
-			>
-				Share to whatsapp
-			</a>
+			<button onclick="shareToWhatsApp('{{ location }}')" class="buttonwhat">
+				Share to WhatsApp
+			</button>
 		</div>
 		<footer>
 			<!-- <p>
@@ -182,6 +177,12 @@
 
 				// Call getLocation to start the geolocation process
 				getLocation();
+			}
+		</script>
+		<script>
+			function shareToWhatsApp(location) {
+				// Replace this with your logic to open WhatsApp with the desired location
+				window.location.href = "whatsapp://send?text=https://www.google.com/maps/search/?api=1%26query=" + location;
 			}
 		</script>
 	</body>
