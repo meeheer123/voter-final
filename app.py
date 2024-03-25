@@ -6,10 +6,10 @@ app = Flask(__name__)
 app.secret_key = 'ENS'
 
 db_params = {
-    'dbname': 'election_database',
+    'dbname': 'election_database_c9l7',
     'user': 'mihir',
-    'password': '2f1dXRnCquM3IxCVmsEjZEir0HmKp2fA',
-    'host': 'dpg-cm5tuba1hbls73alqd4g-a.singapore-postgres.render.com',
+    'password': '0XTukEdj9EQa9SjX1oTvrTE9lIlfgxUD',
+    'host': 'dpg-co0fi8ljm4es73dtuf4g-a.singapore-postgres.render.com',
     'port': 5432
 }
 
