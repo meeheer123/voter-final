@@ -3,9 +3,9 @@ import psycopg2
 # Connect to PostgreSQL (replace placeholders with your actual credentials)
 conn = psycopg2.connect(
     user="mihir",
-    password="2f1dXRnCquM3IxCVmsEjZEir0HmKp2fA",
-    host="dpg-cm5tuba1hbls73alqd4g-a.singapore-postgres.render.com",
-    database="election_database"
+    password="0XTukEdj9EQa9SjX1oTvrTE9lIlfgxUD",
+    host="dpg-co0fi8ljm4es73dtuf4g-a.singapore-postgres.render.com",
+    database="election_database_c9l7"
 )
 
 # Function to fetch data from the database and organize it
